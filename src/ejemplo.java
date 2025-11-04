@@ -1,6 +1,6 @@
 
 public class ejemplo {
-	String nombre = "Nombre";
+	String nombre = "Prueba";
 	
 	
 }
