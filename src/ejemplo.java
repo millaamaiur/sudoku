@@ -1,4 +1,6 @@
 
 public class ejemplo {
-	String nombre;
+	String nombre = "Julen rancio dmrwbfeubwefw";
+	
+	
 }
