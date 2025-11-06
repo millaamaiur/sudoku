@@ -8,7 +8,7 @@ public class VentanaAdmin extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-	//Comentario paul
+	
 	/**
 	 * Launch the application.
 	 */
