@@ -1,14 +1,15 @@
+package gui;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-public class VentanaAdmin extends JFrame {
+public class VentanaPartida extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-	
+
 	/**
 	 * Launch the application.
 	 */
@@ -16,7 +17,7 @@ public class VentanaAdmin extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					VentanaAdmin frame = new VentanaAdmin();
+					VentanaPartida frame = new VentanaPartida();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -28,7 +29,7 @@ public class VentanaAdmin extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public VentanaAdmin() {
+	public VentanaPartida() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 900, 700);
 		contentPane = new JPanel();
