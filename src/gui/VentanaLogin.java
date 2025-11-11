@@ -29,7 +29,7 @@ public class VentanaLogin extends JFrame {
 			}
 		});
 	}
-
+	
 	/**
 	 * Create the frame.
 	 */

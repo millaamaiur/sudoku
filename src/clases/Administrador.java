@@ -1,7 +1,7 @@
 package clases;
 
 public class Administrador extends Usuario {
-//fjaklñsd
+//
     public Administrador(String usuario, String contraseña, int idUsuario) {
         super(usuario, contraseña, idUsuario);
     }
