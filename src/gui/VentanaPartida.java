@@ -5,6 +5,8 @@ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class VentanaPartida extends JFrame {
 
@@ -62,6 +64,15 @@ public class VentanaPartida extends JFrame {
 		JButton btnReiniciar = new JButton("Reiniciar");
 		JButton btnResolver = new JButton("Resolver");
 		JButton btnAjustes = new JButton("Ajustes");
+		//Pasar a los ajustes
+		btnAjustes.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				VentanaAjustes ventana = new VentanaAjustes(VentanaPartida.this);
+				ventana.setVisible(true);
+				VentanaPartida.this.setVisible(false);
+			}
+		});
 		JButton btnVolver = new JButton("Volver");
 		
 

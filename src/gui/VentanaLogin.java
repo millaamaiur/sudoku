@@ -5,12 +5,16 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JPasswordField;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class VentanaLogin extends JFrame {
 
@@ -20,7 +24,8 @@ public class VentanaLogin extends JFrame {
 	private JPasswordField passwordField;
 	private String usuarioTests = "usuario";
 	private String passTests = "password";
-
+	private JButton btnLogin;
+	
 	/**
 	 * Launch the application.
 	 */
@@ -54,6 +59,18 @@ public class VentanaLogin extends JFrame {
 		contentPane.add(lblUsuario);
 		
 		txtUsuario = new JTextField();
+		txtUsuario.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyReleased(KeyEvent e) {
+				String user = txtUsuario.getText();
+				String pass= String.copyValueOf(passwordField.getPassword());
+			    if(user.isEmpty() || pass.isEmpty()) {
+			    	btnLogin.setEnabled(false);
+			    }else {
+			    	btnLogin.setEnabled(true);
+			    }
+		    }
+			});
 		txtUsuario.setBounds(231, 127, 96, 19);
 		contentPane.add(txtUsuario);
 		txtUsuario.setColumns(10);
@@ -63,10 +80,23 @@ public class VentanaLogin extends JFrame {
 		contentPane.add(lblContrasenya);
 		
 		passwordField = new JPasswordField();
+		passwordField.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyReleased(KeyEvent e) {
+				String user = txtUsuario.getText();
+				String pass= String.copyValueOf(passwordField.getPassword());
+			    if(user.isEmpty() || pass.isEmpty()) {
+			    	btnLogin.setEnabled(false);
+			    }else {
+			    	btnLogin.setEnabled(true);
+			    }
+			}
+		});
 		passwordField.setBounds(231, 158, 96, 19);
 		contentPane.add(passwordField);
 		
-		JButton btnLogin = new JButton("Iniciar sesion");
+		btnLogin = new JButton("Iniciar sesion");
+		btnLogin.setEnabled(false);
 		btnLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -74,9 +104,12 @@ public class VentanaLogin extends JFrame {
 				String contrasenyaInput = String.copyValueOf(passwordField.getPassword());
 				
 				if (comprobarContrasenya(usuarioInput, contrasenyaInput)) {
+					
 					VentanaPartida ventana = new VentanaPartida(VentanaLogin.this);
 					ventana.setVisible(true);
 					VentanaLogin.this.setVisible(false);
+				}else {
+					JOptionPane.showMessageDialog(VentanaLogin.this, "Error, usuario o contraseña incorrectos");
 				}
 				
 				//Los usuarios donde los vamos a crear??
