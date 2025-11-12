@@ -18,6 +18,8 @@ public class VentanaLogin extends JFrame {
 	private JPanel contentPane;
 	private JTextField txtUsuario;
 	private JPasswordField passwordField;
+	private String usuarioTests = "usuario";
+	private String passTests = "password";
 
 	/**
 	 * Launch the application.
@@ -71,11 +73,21 @@ public class VentanaLogin extends JFrame {
 				String usuarioInput = txtUsuario.getText();
 				String contrasenyaInput = String.copyValueOf(passwordField.getPassword());
 				
+				if (comprobarContrasenya(usuarioInput, contrasenyaInput)) {
+					VentanaPartida ventana = new VentanaPartida(VentanaLogin.this);
+					ventana.setVisible(true);
+					VentanaLogin.this.setVisible(false);
+				}
+				
 				//Los usuarios donde los vamos a crear??
 				
 			}
 		});
 		btnLogin.setBounds(190, 203, 115, 21);
 		contentPane.add(btnLogin);
+	}
+	
+	public Boolean comprobarContrasenya(String usuario, String contraseña) {
+		return (usuario.equals(usuarioTests) && contraseña.equals(passTests));
 	}
 }
