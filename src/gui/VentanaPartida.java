@@ -3,6 +3,8 @@ package gui;
 import java.awt.*;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class VentanaPartida extends JFrame {
 
@@ -61,6 +63,7 @@ public class VentanaPartida extends JFrame {
 		JButton btnResolver = new JButton("Resolver");
 		JButton btnAjustes = new JButton("Ajustes");
 		JButton btnVolver = new JButton("Volver");
+		
 
 		panelControles.add(btnComprobar);
 		panelControles.add(btnReiniciar);
@@ -71,11 +74,12 @@ public class VentanaPartida extends JFrame {
 		contentPane.add(panelControles, BorderLayout.SOUTH);
 
 		// ----- EVENTO VOLVER -----
-		btnVolver.addActionListener(e -> {
-			parent.setVisible(true);
-			dispose();
+		btnVolver.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				parent.setVisible(true);
+				dispose();
+			}
 		});
-
 		// Aquí podrías añadir los listeners de cada botón (temporizador, comprobar, etc.)
 	}
 }
