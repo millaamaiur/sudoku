@@ -40,7 +40,7 @@ public class VentanaLogin extends JFrame {
 	 */
 	public VentanaLogin() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 500, 600);
+		setBounds(100, 100, 500, 400);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
@@ -48,20 +48,20 @@ public class VentanaLogin extends JFrame {
 		contentPane.setLayout(null);
 		
 		JLabel lblUsuario = new JLabel("Usuario");
-		lblUsuario.setBounds(143, 193, 45, 13);
+		lblUsuario.setBounds(176, 131, 45, 13);
 		contentPane.add(lblUsuario);
 		
 		txtUsuario = new JTextField();
-		txtUsuario.setBounds(248, 190, 96, 19);
+		txtUsuario.setBounds(231, 127, 96, 19);
 		contentPane.add(txtUsuario);
 		txtUsuario.setColumns(10);
 		
 		JLabel lblContrasenya = new JLabel("Contraseña");
-		lblContrasenya.setBounds(143, 270, 66, 13);
+		lblContrasenya.setBounds(155, 162, 66, 13);
 		contentPane.add(lblContrasenya);
 		
 		passwordField = new JPasswordField();
-		passwordField.setBounds(248, 267, 96, 19);
+		passwordField.setBounds(231, 158, 96, 19);
 		contentPane.add(passwordField);
 		
 		JButton btnLogin = new JButton("Iniciar sesion");
@@ -75,7 +75,7 @@ public class VentanaLogin extends JFrame {
 				
 			}
 		});
-		btnLogin.setBounds(163, 369, 115, 21);
+		btnLogin.setBounds(190, 203, 115, 21);
 		contentPane.add(btnLogin);
 	}
 }
