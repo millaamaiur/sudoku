@@ -63,5 +63,45 @@ public class VentanaAdmin extends JFrame {
         
         configurarAcciones();
 	}
-
+	
+	private void configurarAcciones() {
+        botonAjustes.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                abrirAjustes();
+            }
+        });
+        
+        botonCrearSudoku.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                abrirCrearSudoku();
+            }
+        });
+        botonSalir.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                salir();
+            }
+        });
+     
+}
+	
+	
+	private void abrirAjustes() {
+        // Cierra esta ventana y abre ajustes
+        dispose();
+        VentanaAjustes ajustes = new VentanaAjustes();
+        ajustes.setVisible(true);
+    }
+	
+	
+	
+	private void abrirCrearSudoku() {
+		//necesitemao crear la ventanacrearsudoku para esto
+	}
+	
+	private void salir() {
+		dispose();
+		VentanaLogin login = new VentanaLogin();
+		login.setVisible(true);
+	}
+	
 }
