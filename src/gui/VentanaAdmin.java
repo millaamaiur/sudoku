@@ -10,7 +10,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 public class VentanaAdmin extends JFrame {
-
+	//Atributos de la ventana admin
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private VentanaLogin parent;

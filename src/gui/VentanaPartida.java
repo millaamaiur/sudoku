@@ -10,11 +10,10 @@ import java.awt.event.MouseEvent;
 
 public class VentanaPartida extends JFrame {
 
+	//Atributos de la ventana partida
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private VentanaLogin parent;
-
-	// Componentes principales
 	private JPanel panelTablero;
 	private JPanel panelControles;
 	private JLabel lblTiempo;
@@ -32,13 +31,15 @@ public class VentanaPartida extends JFrame {
 		contentPane.setBorder(new EmptyBorder(10, 10, 10, 10));
 		setContentPane(contentPane);
 
-		// ----- PANEL SUPERIOR -----
+		//Panel de arriba (Dificultad y tiempo)
+		//Aqui se crea el panel y los labels de dificultad y tiempo
 		JPanel panelSuperior = new JPanel(new BorderLayout());
 		lblDificultad = new JLabel("Dificultad: Normal");
 		lblDificultad.setFont(new Font("Segoe UI", Font.BOLD, 16));
 		lblTiempo = new JLabel("Tiempo: 00:00");
 		lblTiempo.setFont(new Font("Segoe UI", Font.BOLD, 16));
 
+		//Aqui se añaden los labels al panel y el panel al borderLayout (NORTE)
 		panelSuperior.add(lblDificultad, BorderLayout.WEST);
 		panelSuperior.add(lblTiempo, BorderLayout.EAST);
 		contentPane.add(panelSuperior, BorderLayout.NORTH);
@@ -47,7 +48,7 @@ public class VentanaPartida extends JFrame {
 		panelTablero = new JPanel(new GridLayout(9, 9, 2, 2));
 		panelTablero.setBackground(new Color(192, 192, 192));
 
-		// Generar casillas vacías (ejemplo)
+		//Con este bucle for generamos las casillas. ES SOLO VISUAL
 		for (int i = 0; i < 81; i++) {
 			JTextField celda = new JTextField();
 			celda.setHorizontalAlignment(JTextField.CENTER);
@@ -57,14 +58,35 @@ public class VentanaPartida extends JFrame {
 
 		contentPane.add(panelTablero, BorderLayout.CENTER);
 
-		// ----- PANEL INFERIOR (BOTONES) -----
+		//Panel de abajo (Botones)
+		//Aqui se crea el panel y todos los botones
 		panelControles = new JPanel(new FlowLayout(FlowLayout.CENTER, 20, 10));
 
 		JButton btnComprobar = new JButton("Comprobar");
 		JButton btnReiniciar = new JButton("Reiniciar");
 		JButton btnResolver = new JButton("Resolver");
 		JButton btnAjustes = new JButton("Ajustes");
-		//Pasar a los ajustes
+		JButton btnVolver = new JButton("Volver");
+		
+
+		//Aqui se añaden los botones al panel y el panel al borderLayout(SUR)
+		panelControles.add(btnComprobar);
+		panelControles.add(btnReiniciar);
+		panelControles.add(btnResolver);
+		panelControles.add(btnAjustes);
+		panelControles.add(btnVolver);
+		contentPane.add(panelControles, BorderLayout.SOUTH);
+
+		
+		//ACCIONES DE CADA BOTÓN
+		// ----- BOTON VOLVER -----
+		btnVolver.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				parent.setVisible(true);
+				dispose();
+			}
+		});
+		// ----- BOTON AJUSTES -----
 		btnAjustes.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -73,24 +95,5 @@ public class VentanaPartida extends JFrame {
 				VentanaPartida.this.setVisible(false);
 			}
 		});
-		JButton btnVolver = new JButton("Volver");
-		
-
-		panelControles.add(btnComprobar);
-		panelControles.add(btnReiniciar);
-		panelControles.add(btnResolver);
-		panelControles.add(btnAjustes);
-		panelControles.add(btnVolver);
-
-		contentPane.add(panelControles, BorderLayout.SOUTH);
-
-		// ----- EVENTO VOLVER -----
-		btnVolver.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				parent.setVisible(true);
-				dispose();
-			}
-		});
-		// Aquí podrías añadir los listeners de cada botón (temporizador, comprobar, etc.)
 	}
 }

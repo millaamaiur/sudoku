@@ -7,14 +7,11 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 public class VentanaAjustes extends JFrame {
-
+	//Atributos de la ventana ajustes
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private VentanaPartida parent;
 
-	/**
-	 * Create the frame.
-	 */
 	public VentanaAjustes(VentanaPartida parent) {
 		this.parent = parent;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

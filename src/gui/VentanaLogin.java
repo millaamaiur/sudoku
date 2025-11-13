@@ -17,7 +17,7 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
 public class VentanaLogin extends JFrame {
-
+	//Atributos de la ventana login. Es la ventana padre (Por eso tiene main)
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTextField txtUsuario;
@@ -26,9 +26,7 @@ public class VentanaLogin extends JFrame {
 	private String passTests = "password";
 	private JButton btnLogin;
 	
-	/**
-	 * Launch the application.
-	 */
+	//Main de la ventanaLogin
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -42,23 +40,37 @@ public class VentanaLogin extends JFrame {
 		});
 	}
 
-	/**
-	 * Create the frame.
-	 */
+	
 	public VentanaLogin() {
+		//Crear content pane (Por defecto)
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 500, 400);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
+		//Label y JTextField USUARIO
 		JLabel lblUsuario = new JLabel("Usuario");
 		lblUsuario.setBounds(176, 131, 45, 13);
 		contentPane.add(lblUsuario);
 		
 		txtUsuario = new JTextField();
+		txtUsuario.setBounds(231, 127, 96, 19);
+		contentPane.add(txtUsuario);
+		txtUsuario.setColumns(10);
+		
+		//Label y JTextField CONTRASEÑA
+		JLabel lblContrasenya = new JLabel("Contraseña");
+		lblContrasenya.setBounds(155, 162, 66, 13);
+		contentPane.add(lblContrasenya);
+		
+		passwordField = new JPasswordField();
+		passwordField.setBounds(231, 158, 96, 19);
+		contentPane.add(passwordField);
+		
+		
+		//KeyListeners de los campos usuario y contraseña
 		txtUsuario.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyReleased(KeyEvent e) {
@@ -71,15 +83,7 @@ public class VentanaLogin extends JFrame {
 			    }
 		    }
 			});
-		txtUsuario.setBounds(231, 127, 96, 19);
-		contentPane.add(txtUsuario);
-		txtUsuario.setColumns(10);
 		
-		JLabel lblContrasenya = new JLabel("Contraseña");
-		lblContrasenya.setBounds(155, 162, 66, 13);
-		contentPane.add(lblContrasenya);
-		
-		passwordField = new JPasswordField();
 		passwordField.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyReleased(KeyEvent e) {
@@ -92,9 +96,10 @@ public class VentanaLogin extends JFrame {
 			    }
 			}
 		});
-		passwordField.setBounds(231, 158, 96, 19);
-		contentPane.add(passwordField);
 		
+		
+		//ACCIONES DE CADA BOTÓN
+		// ----- BOTON LOGIN -----
 		btnLogin = new JButton("Iniciar sesion");
 		btnLogin.setEnabled(false);
 		btnLogin.addActionListener(new ActionListener() {
@@ -112,7 +117,9 @@ public class VentanaLogin extends JFrame {
 					JOptionPane.showMessageDialog(VentanaLogin.this, "Error, usuario o contraseña incorrectos");
 				}
 				
-				//Los usuarios donde los vamos a crear??
+				//Los usuarios hay que crearlos en la base de datos pero de manera provisional:
+				//usuario: usuario
+				//contraseña: password
 				
 			}
 		});
@@ -120,6 +127,7 @@ public class VentanaLogin extends JFrame {
 		contentPane.add(btnLogin);
 	}
 	
+	//Función para comprobar que la contraseña y el usuario son correctos
 	public Boolean comprobarContrasenya(String usuario, String contraseña) {
 		return (usuario.equals(usuarioTests) && contraseña.equals(passTests));
 	}
