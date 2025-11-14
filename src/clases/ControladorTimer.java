@@ -4,7 +4,7 @@ import javax.swing.JLabel;
 import javax.swing.SwingUtilities;
 
 public class ControladorTimer implements Runnable{
-	private int segundos = 0;
+	private int segundos = 0; 
 	private boolean corriendo = false;
 	private boolean reiniciar = false;
 	private Thread hilo;

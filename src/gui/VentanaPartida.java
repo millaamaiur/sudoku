@@ -42,7 +42,7 @@ public class VentanaPartida extends JFrame {
 		JPanel panelSuperior = new JPanel(new BorderLayout());
 		lblDificultad = new JLabel("Dificultad: Normal");
 		lblDificultad.setFont(new Font("Segoe UI", Font.BOLD, 16));
-		lblTiempo = new JLabel("00:00");
+		lblTiempo = new JLabel("00:00"); 
 		lblTiempo.setFont(new Font("Segoe UI", Font.BOLD, 16));
 		JPanel panelSuperCentral = new JPanel(new FlowLayout());
 
