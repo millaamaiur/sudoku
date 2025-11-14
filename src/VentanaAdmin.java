@@ -1,9 +1,18 @@
+import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
+import javax.swing.AbstractButton;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import gui.VentanaAjustes;
+import gui.VentanaLogin;
+import javax.swing.JLabel;
 
 public class VentanaAdmin extends JFrame {
 
@@ -33,50 +42,55 @@ public class VentanaAdmin extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 900, 700);
 		contentPane = new JPanel();
+		contentPane.setBackground(new Color(51, 204, 255));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
 		setContentPane(contentPane);
-		
-	}
+		contentPane.setLayout(null);
 	
-	private void initComponents() {
 	//botones de ventanadmin
-		botonAjustes = new JButton("Ajustes");
-		botonAjustes.setFont(new Font("Arial",Font.BOLD,16));
-		botonAjustes.setBackground(new Color(70, 130, 180));
-		botonAjustes.setForeground(Color.WHITE);
+		JButton botonAjustes = new JButton("Ajustes");
+		botonAjustes.setBounds(321, 213, 126, 66);
+		contentPane.add(botonAjustes);
 		
 		
-		botonCrearSudoku = new JButton("Crear Sudoku");
-		botonCrearSudoku.setFont(new Font("Arial", Font.BOLD, 16));
-        botonCrearSudoku.setBackground(new Color(60, 179, 113));
-        botonCrearSudoku.setForeground(Color.WHITE);
+		JButton botonCrearSudoku = new JButton("Crear Sudoku");
+		botonCrearSudoku.setBounds(321, 315, 126, 74);
+		contentPane.add(botonCrearSudoku);
         
-        botonSalir = new JButton("Salir");
-        botonSalir.setFont(new Font("Arial", Font.BOLD, 16));
-        botonSalir.setBackground(new Color(205, 92, 92));
-        botonCrearSudoku.setForeground(Color.WHITE);
+        JButton botonSalir = new JButton("Salir");
+        botonSalir.setBounds(321, 428, 126, 79);
+        contentPane.add(botonSalir);
+       
         
-        contentPane.add(btnAjustes);
-        contentPane.add(btnCrearSudoku);
-        contentPane.add(btnSalir);
+        contentPane.add(botonAjustes);
+        contentPane.add(botonCrearSudoku);
+        contentPane.add(botonSalir);
+        
+        JLabel titulo = new JLabel("SUDOKU - ADMIN");
+        titulo.setFont(new Font("Tahoma", Font.PLAIN, 17));
+        titulo.setBounds(321, 97, 196, 80);
+        contentPane.add(titulo);
         
         configurarAcciones();
 	}
 	
 	private void configurarAcciones() {
-        botonAjustes.addActionListener(new ActionListener() {
+        AbstractButton botonAjustes = null;
+		botonAjustes.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 abrirAjustes();
             }
         });
         
-        botonCrearSudoku.addActionListener(new ActionListener() {
+        AbstractButton botonCrearSudoku = null;
+		botonCrearSudoku.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 abrirCrearSudoku();
             }
         });
-        botonSalir.addActionListener(new ActionListener() {
+        AbstractButton botonSalir = null;
+		botonSalir.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 salir();
             }
@@ -87,9 +101,9 @@ public class VentanaAdmin extends JFrame {
 	
 	private void abrirAjustes() {
         // Cierra esta ventana y abre ajustes
-        dispose();
+       /* dispose();
         VentanaAjustes ajustes = new VentanaAjustes();
-        ajustes.setVisible(true);
+        ajustes.setVisible(true);*/
     }
 	
 	
@@ -103,5 +117,4 @@ public class VentanaAdmin extends JFrame {
 		VentanaLogin login = new VentanaLogin();
 		login.setVisible(true);
 	}
-	
 }

@@ -1,6 +1,7 @@
 package gui;
 
 import java.awt.EventQueue;
+import java.awt.Font;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -137,7 +138,7 @@ public class VentanaLogin extends JFrame {
 		
 		
 		//boton para salir de ventanalogin
-		btnSalir = new JButton("Salir");
+		JButton btnSalir = new JButton("Salir");
 		btnSalir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				confirmarSalida();
