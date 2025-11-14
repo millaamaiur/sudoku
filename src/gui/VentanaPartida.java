@@ -10,7 +10,7 @@ import java.awt.event.MouseEvent;
 
 public class VentanaPartida extends JFrame {
 
-	//Atributos de la ventana partida
+	//Atributos de la ventana partida 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private VentanaLogin parent;

@@ -12,7 +12,7 @@ public abstract class Usuario {
 		this.idUsuario = idUsuario;
 	}
 
-	/*Metodos de la clase Usuario*/
+	/*Metodos de la clase Usuario*/ 
 	
 	public String getUsuario() {
 		return usuario;

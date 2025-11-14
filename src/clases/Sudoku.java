@@ -2,7 +2,7 @@ package clases;
 
 public class Sudoku {
 	/*Los sudokus creo que lo mejor sería hacerlo con arrays porque es lo mas sencillo.
-	 * Lo de solucion es directamente el sudoku resuelto*/
+	 * Lo de solucion es directamente el sudoku resuelto*/ 
 	
 	private int[][] tablero;
 	private int[][] solucion;

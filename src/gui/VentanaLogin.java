@@ -17,7 +17,7 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
 public class VentanaLogin extends JFrame {
-	//Atributos de la ventana login. Es la ventana padre (Por eso tiene main)
+	//Atributos de la ventana login. Es la ventana padre (Por eso tiene main) 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTextField txtUsuario;

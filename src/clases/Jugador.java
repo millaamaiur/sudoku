@@ -11,7 +11,7 @@ public class Jugador extends Usuario {
 	}
 
 	
-	/*Metodos de la clase Jugador*/
+	/*Metodos de la clase Jugador*/ 
 	
 	public String getRol() {
 		return "Jugador";
