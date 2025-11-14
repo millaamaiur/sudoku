@@ -3,6 +3,9 @@ package gui;
 import java.awt.*;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
+
+import clases.ControladorTimer;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
@@ -18,6 +21,9 @@ public class VentanaPartida extends JFrame {
 	private JPanel panelControles;
 	private JLabel lblTiempo;
 	private JLabel lblDificultad;
+	private JButton btnReiniciarTemp;
+	private JButton btnPararTemp;
+	private JButton btnIniciarTemp;
 
 	public VentanaPartida(VentanaLogin parent) {
 		this.parent = parent;
@@ -36,12 +42,23 @@ public class VentanaPartida extends JFrame {
 		JPanel panelSuperior = new JPanel(new BorderLayout());
 		lblDificultad = new JLabel("Dificultad: Normal");
 		lblDificultad.setFont(new Font("Segoe UI", Font.BOLD, 16));
-		lblTiempo = new JLabel("Tiempo: 00:00");
+		lblTiempo = new JLabel("00:00");
 		lblTiempo.setFont(new Font("Segoe UI", Font.BOLD, 16));
+		JPanel panelSuperCentral = new JPanel(new FlowLayout());
 
 		//Aqui se añaden los labels al panel y el panel al borderLayout (NORTE)
 		panelSuperior.add(lblDificultad, BorderLayout.WEST);
 		panelSuperior.add(lblTiempo, BorderLayout.EAST);
+		panelSuperior.add(panelSuperCentral, BorderLayout.CENTER);
+		
+		btnIniciarTemp = new JButton("Iniciar");
+		panelSuperCentral.add(btnIniciarTemp);
+		
+		btnPararTemp = new JButton("Parar");
+		panelSuperCentral.add(btnPararTemp);
+		
+		btnReiniciarTemp = new JButton("Reiniciar");
+		panelSuperCentral.add(btnReiniciarTemp);
 		contentPane.add(panelSuperior, BorderLayout.NORTH);
 
 		// ----- PANEL CENTRAL (TABLERO) -----
@@ -78,6 +95,8 @@ public class VentanaPartida extends JFrame {
 		contentPane.add(panelControles, BorderLayout.SOUTH);
 
 		
+		ControladorTimer timer = new ControladorTimer(0, false, lblTiempo);
+
 		//ACCIONES DE CADA BOTÓN
 		// ----- BOTON VOLVER -----
 		btnVolver.addActionListener(new ActionListener() {
@@ -93,6 +112,25 @@ public class VentanaPartida extends JFrame {
 				VentanaAjustes ventana = new VentanaAjustes(VentanaPartida.this);
 				ventana.setVisible(true);
 				VentanaPartida.this.setVisible(false);
+			}
+		});
+		// ----- BOTON INICIAR TEMP -----
+		btnIniciarTemp.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				timer.start();
+			}
+		});
+		// ----- BOTON PARAR TEMP -----
+		btnPararTemp.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				timer.stop();
+			}
+		});
+		
+		// ----- BOTON RESET TEMP -----
+		btnReiniciarTemp.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				timer.reset();
 			}
 		});
 	}
