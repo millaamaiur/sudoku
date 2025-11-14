@@ -1,6 +1,7 @@
 package gui;
 
 import java.awt.EventQueue;
+import java.awt.Font;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -41,6 +42,7 @@ public class VentanaLogin extends JFrame {
 	}
 
 	
+	
 	public VentanaLogin() {
 		//Crear content pane (Por defecto)
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -50,23 +52,31 @@ public class VentanaLogin extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
+		
+		//titulo de ventana
+		JLabel lblTitulo = new JLabel("SUDOKU GAME");
+		lblTitulo.setBounds(180, 50, 150, 30);
+		lblTitulo.setFont(new java.awt.Font("Arial", Font.BOLD, 18));
+		contentPane.add(lblTitulo);
+		
+		
 		//Label y JTextField USUARIO
 		JLabel lblUsuario = new JLabel("Usuario");
-		lblUsuario.setBounds(176, 131, 45, 13);
+		lblUsuario.setBounds(150, 120, 60, 13);
 		contentPane.add(lblUsuario);
 		
 		txtUsuario = new JTextField();
-		txtUsuario.setBounds(231, 127, 96, 19);
+		txtUsuario.setBounds(220, 117, 120, 25);
 		contentPane.add(txtUsuario);
 		txtUsuario.setColumns(10);
 		
 		//Label y JTextField CONTRASEÑA
 		JLabel lblContrasenya = new JLabel("Contraseña");
-		lblContrasenya.setBounds(155, 162, 66, 13);
+		lblContrasenya.setBounds(150, 160, 70, 13);
 		contentPane.add(lblContrasenya);
 		
 		passwordField = new JPasswordField();
-		passwordField.setBounds(231, 158, 96, 19);
+		passwordField.setBounds(220, 157, 120, 25);
 		contentPane.add(passwordField);
 		
 		
@@ -125,10 +135,31 @@ public class VentanaLogin extends JFrame {
 		});
 		btnLogin.setBounds(190, 203, 115, 21);
 		contentPane.add(btnLogin);
+		
+		
+		//boton para salir de ventanalogin
+		JButton btnSalir = new JButton("Salir");
+		btnSalir.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				confirmarSalida();
+			}
+		});
+		btnSalir.setBounds(170, 250, 140, 30);
+		contentPane.add(btnSalir);
+		
 	}
 	
 	//Función para comprobar que la contraseña y el usuario son correctos
 	public Boolean comprobarContrasenya(String usuario, String contraseña) {
 		return (usuario.equals(usuarioTests) && contraseña.equals(passTests));
 	}
+	
+	private void confirmarSalida() { // para confirmar la salida
+		int confirm = JOptionPane.showConfirmDialog(VentanaLogin.this, "¿Seguro de cerrar el juego?","Salir",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE);
+		if (confirm == JOptionPane.YES_OPTION) {
+			System.exit(0);
+		}
+	}
+	
+
 }
