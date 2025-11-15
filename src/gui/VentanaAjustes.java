@@ -39,12 +39,12 @@ public class VentanaAjustes extends JFrame {
 		gbl_panelDif.rowWeights = new double[]{1.0};
 		panelDif.setLayout(gbl_panelDif);
 
-		JButton btnNewButton = new JButton("New button");
-		GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
-		gbc_btnNewButton.gridx = 3; 
-		gbc_btnNewButton.gridy = 0; 
-		gbc_btnNewButton.anchor = GridBagConstraints.CENTER;
-		panelDif.add(btnNewButton, gbc_btnNewButton);
+		JButton btnDif = new JButton("Dificultad");
+		GridBagConstraints gbc_btnDif = new GridBagConstraints();
+		gbc_btnDif.gridx = 3; 
+		gbc_btnDif.gridy = 0; 
+		gbc_btnDif.anchor = GridBagConstraints.CENTER;
+		panelDif.add(btnDif, gbc_btnDif);
 
 		
 		JPanel panelSonido = new JPanel();
@@ -56,23 +56,53 @@ public class VentanaAjustes extends JFrame {
 		gbl_panelSonido.rowWeights = new double[]{1.0};
 		panelSonido.setLayout(gbl_panelSonido);
 		
-		JButton btnNewButton_1 = new JButton("New button");
-		btnNewButton_1.addActionListener(new ActionListener() {
+		JButton btnSonido = new JButton("Sonido");
+		btnSonido.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		GridBagConstraints gbc_btnNewButton_1 = new GridBagConstraints();
-		gbc_btnNewButton_1.gridx = 3;
-		gbc_btnNewButton_1.gridy = 0;
-		gbc_btnNewButton_1.anchor = GridBagConstraints.CENTER;
-		panelSonido.add(btnNewButton_1, gbc_btnNewButton_1);
+		GridBagConstraints gbc_btnSonido = new GridBagConstraints();
+		gbc_btnSonido.gridx = 3;
+		gbc_btnSonido.gridy = 0;
+		gbc_btnSonido.anchor = GridBagConstraints.CENTER;
+		panelSonido.add(btnSonido, gbc_btnSonido);
+		
+		
 		
 		JPanel panelColor = new JPanel();
 		contentPane.add(panelColor);
-		panelColor.setLayout(new BorderLayout(0, 0));
+		GridBagLayout gbl_panelColor = new GridBagLayout();
+		gbl_panelColor.columnWidths = new int[] {0, 0, 0, 0, 0, 0, 0};
+		gbl_panelColor.rowHeights = new int[]{0};
+		gbl_panelColor.columnWeights = new double[]{1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0};
+		gbl_panelColor.rowWeights = new double[]{1.0};
+		panelColor.setLayout(gbl_panelColor);
+		
+		JButton btnColor = new JButton("Color");
+		GridBagConstraints gbc_btnColor = new GridBagConstraints();
+		gbc_btnColor.insets = new Insets(0, 0, 0, 5);
+		gbc_btnColor.gridx = 3;
+		gbc_btnColor.gridy = 0;
+		panelColor.add(btnColor, gbc_btnColor);
+
+		
 		
 		JPanel panelAtras = new JPanel();
 		contentPane.add(panelAtras);
+		GridBagLayout gbl_panelAtras = new GridBagLayout();
+		gbl_panelAtras.columnWidths = new int[] {0, 0, 0, 0, 0, 0, 0};
+		gbl_panelAtras.rowHeights = new int[]{0, 0};
+		gbl_panelAtras.columnWeights = new double[]{1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0};
+		gbl_panelAtras.rowWeights = new double[]{1.0, 0.0};
+		panelAtras.setLayout(gbl_panelAtras);
+		
+		JButton btnNewButton = new JButton("New button");
+		GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
+		gbc_btnNewButton.insets = new Insets(0, 0, 0, 5);
+		gbc_btnNewButton.gridx = 3;
+		gbc_btnNewButton.gridy = 1;
+		panelAtras.add(btnNewButton, gbc_btnNewButton);
+		
 	}
 
 }
