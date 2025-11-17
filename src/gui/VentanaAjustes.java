@@ -102,6 +102,7 @@ public class VentanaAjustes extends JFrame {
 		panelColor.add(lblColor, gbc_lblColor);
 		
 		JComboBox combColor = new JComboBox();
+		combColor.setModel(new DefaultComboBoxModel(new String[] {"Azul", "Rojo", "Amarillo"}));
 		GridBagConstraints gbc_combColor = new GridBagConstraints();
 		gbc_combColor.insets = new Insets(0, 0, 0, 5);
 		gbc_combColor.fill = GridBagConstraints.HORIZONTAL;
