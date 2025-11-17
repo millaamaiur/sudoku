@@ -1,6 +1,8 @@
 package gui;
 
 import java.awt.*;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
@@ -60,7 +62,7 @@ public class VentanaPartida extends JFrame {
 		btnReiniciarTemp = new JButton("Reiniciar");
 		panelSuperCentral.add(btnReiniciarTemp);
 		contentPane.add(panelSuperior, BorderLayout.NORTH);
-
+		/*
 		// ----- PANEL CENTRAL (TABLERO) -----
 		panelTablero = new JPanel(new GridLayout(9, 9, 2, 2));
 		panelTablero.setBackground(new Color(192, 192, 192));
@@ -71,10 +73,38 @@ public class VentanaPartida extends JFrame {
 			celda.setHorizontalAlignment(JTextField.CENTER);
 			celda.setFont(new Font("Segoe UI", Font.PLAIN, 18));
 			panelTablero.add(celda);
-		}
+		}  ESTO LO QUITO PARA BLOQUEAR LAS LETRAS EN EL SUDOKU
+*/		
+		
+		// ----- PANEL CENTRAL (TABLERO) ----- con las letras bloqueadas
+		panelTablero = new JPanel(new GridLayout(9, 9, 2, 2));
+		panelTablero.setBackground(new Color(192, 192, 192));
 
+		//Con este bucle for generamos las casillas. SOLO NÚMEROS 1-9
+		for (int i = 0; i < 81; i++) {
+		    JTextField celda = new JTextField();
+		    celda.setHorizontalAlignment(JTextField.CENTER);
+		    celda.setFont(new Font("Segoe UI", Font.PLAIN, 18));
+		    
+		    celda.addKeyListener(new KeyAdapter() {
+		        @Override
+		        public void keyTyped(KeyEvent e) {
+		            char c = e.getKeyChar();
+		            JTextField source = (JTextField) e.getSource();
+		            // Solo permitir numeros del 1 al 9
+		            if (!(c >= '1' && c <= '9') || source.getText().length() >= 1) {
+		                e.consume(); // Bloquear el carácter
+		            }
+		        }
+		    });
+		    
+		    panelTablero.add(celda);
+		}
+		
 		contentPane.add(panelTablero, BorderLayout.CENTER);
 
+		//------------------------------------------------------------------------
+		
 		//Panel de abajo (Botones)
 		//Aqui se crea el panel y todos los botones
 		panelControles = new JPanel(new FlowLayout(FlowLayout.CENTER, 20, 10));

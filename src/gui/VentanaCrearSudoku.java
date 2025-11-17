@@ -1,6 +1,8 @@
 package gui;
 
 import java.awt.BorderLayout;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.FlowLayout;
@@ -55,12 +57,25 @@ public class VentanaCrearSudoku extends JFrame {
 		panelTablero = new JPanel(new GridLayout(9, 9, 2, 2));
 		panelTablero.setBackground(new Color(192, 192, 192));
 
-		// Generar casillas vacías (ejemplo)
+		// Generar casillas vacías - SOLO NÚMEROS 1-9 pero sin dejar q pongan caracteres
 		for (int i = 0; i < 81; i++) {
-			JTextField celda = new JTextField();
-			celda.setHorizontalAlignment(JTextField.CENTER);
-			celda.setFont(new Font("Segoe UI", Font.PLAIN, 18));
-			panelTablero.add(celda);
+		    JTextField celda = new JTextField();
+		    celda.setHorizontalAlignment(JTextField.CENTER);
+		    celda.setFont(new Font("Segoe UI", Font.PLAIN, 18));
+		    
+		    celda.addKeyListener(new KeyAdapter() {
+		        @Override
+		        public void keyTyped(KeyEvent e) {
+		            char c = e.getKeyChar();
+		            JTextField source = (JTextField) e.getSource();
+		            // Solo permitir los numeros del 1 al 9
+		            if (!(c >= '1' && c <= '9') || source.getText().length() >= 1) {
+		                e.consume(); // Bloquear el caracteres 
+		            }
+		        }
+		    });
+		    
+		    panelTablero.add(celda);
 		}
 
 		contentPane.add(panelTablero, BorderLayout.CENTER);

@@ -133,7 +133,7 @@ public class VentanaLogin extends JFrame {
 				
 			}
 		});
-		btnLogin.setBounds(190, 203, 115, 21);
+		btnLogin.setBounds(170, 206, 132, 25);
 		contentPane.add(btnLogin);
 		
 		getRootPane().setDefaultButton(btnLogin);
