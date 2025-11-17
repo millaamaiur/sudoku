@@ -8,8 +8,11 @@ import javax.swing.border.EmptyBorder;
 import java.awt.GridLayout;
 import java.awt.FlowLayout;
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.GridBagLayout;
 import javax.swing.JButton;
+import javax.swing.JColorChooser;
+
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import java.awt.event.ActionListener;
@@ -23,6 +26,7 @@ public class VentanaAjustes extends JFrame {
 	//Atributos de la ventana ajustes 
 	private static final long serialVersionUID = 1L;
 	private VentanaPartida parent;
+	private JPanel panelSonido;
 
 	public VentanaAjustes(VentanaPartida parent) {
 		this.parent = parent;
@@ -60,7 +64,7 @@ public class VentanaAjustes extends JFrame {
 		panelDif.add(combDificultad, gbc_combDificultad);
 
 		
-		JPanel panelSonido = new JPanel();
+		panelSonido = new JPanel();
 		contentPane.add(panelSonido);
 		GridBagLayout gbl_panelSonido = new GridBagLayout();
 		gbl_panelSonido.columnWidths = new int[] {0, 0, 0, 0, 0, 0, 0};
@@ -101,14 +105,25 @@ public class VentanaAjustes extends JFrame {
 		gbc_lblColor.gridy = 0;
 		panelColor.add(lblColor, gbc_lblColor);
 		
-		JComboBox combColor = new JComboBox();
-		combColor.setModel(new DefaultComboBoxModel(new String[] {"Azul", "Rojo", "Amarillo"}));
-		GridBagConstraints gbc_combColor = new GridBagConstraints();
-		gbc_combColor.insets = new Insets(0, 0, 0, 5);
-		gbc_combColor.fill = GridBagConstraints.HORIZONTAL;
-		gbc_combColor.gridx = 3;
-		gbc_combColor.gridy = 1;
-		panelColor.add(combColor, gbc_combColor);
+		JButton btnColor = new JButton("Cambiar");
+		btnColor.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Color nuevoColor = JColorChooser.showDialog(
+	                    null,
+	                    "Elige un color",
+	                    getContentPane().getBackground()
+	            );
+	            if (nuevoColor != null) {
+	                getContentPane().setBackground(nuevoColor);
+	                panelSonido.setBackground(nuevoColor);
+	            }
+			}
+		});
+		GridBagConstraints gbc_btnColor = new GridBagConstraints();
+		gbc_btnColor.insets = new Insets(0, 0, 0, 5);
+		gbc_btnColor.gridx = 3;
+		gbc_btnColor.gridy = 1;
+		panelColor.add(btnColor, gbc_btnColor);
 
 		
 		
