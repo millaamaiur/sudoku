@@ -18,7 +18,7 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
 public class VentanaLogin extends JFrame {
-	//Atributos de la ventana login. Es la ventana padre (Por eso tiene main)
+	//Atributos de la ventana login. Es la ventana padre (Por eso tiene main) 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTextField txtUsuario;
@@ -144,7 +144,7 @@ public class VentanaLogin extends JFrame {
 				confirmarSalida();
 			}
 		});
-		btnSalir.setBounds(170, 250, 140, 30);
+		btnSalir.setBounds(10, 332, 98, 21);
 		contentPane.add(btnSalir);
 		
 	}
@@ -155,7 +155,7 @@ public class VentanaLogin extends JFrame {
 	}
 	
 	private void confirmarSalida() { // para confirmar la salida
-		int confirm = JOptionPane.showConfirmDialog(VentanaLogin.this, "¿Seguro de cerrar el juego?","Salir",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE);
+		int confirm = JOptionPane.showConfirmDialog(VentanaLogin.this, "¿Seguro que quieres cerrar el juego?","Salir",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE);
 		if (confirm == JOptionPane.YES_OPTION) {
 			System.exit(0);
 		}

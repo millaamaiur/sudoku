@@ -1,15 +1,16 @@
 package clases;
 
 public class Sudoku {
-	/*Los sudokus creo que lo mejor sería hacerlo con arrays porque es lo mas sencillo.
-	 * Lo de solucion es directamente el sudoku resuelto*/
 	
-	private int[][] tablero;
-	private int[][] solucion;
+	/*Los sudokus creo que lo mejor sería hacerlo con arrays porque es lo mas sencillo.
+	 * Lo de solucion es directamente el sudoku resuelto*/ 
+	
+	private Casilla[][] tablero;
+	private Casilla[][] solucion;
 	private String dificultad;
 	private int id;
 	
-	public Sudoku(int[][] tablero, int[][] solucion, String dificultad, int id) {
+	public Sudoku(Casilla[][] tablero, Casilla[][] solucion, String dificultad, int id) {
 		super();
 		this.tablero = tablero;
 		this.solucion = solucion;
@@ -18,20 +19,19 @@ public class Sudoku {
 	}
 	
 	/*Metodos de la clase Sudoku*/
-	
-	public int[][] getTablero() {
+	public Casilla[][] getTablero() {
 		return tablero;
 	}
 
-	public void setTablero(int[][] tablero) {
+	public void setTablero(Casilla[][] tablero) {
 		this.tablero = tablero;
 	}
 
-	public int[][] getSolucion() {
+	public Casilla[][] getSolucion() {
 		return solucion;
 	}
 
-	public void setSolucion(int[][] solucion) {
+	public void setSolucion(Casilla[][] solucion) {
 		this.solucion = solucion;
 	}
 
@@ -49,8 +49,17 @@ public class Sudoku {
 
 	public void setId(int id) {
 		this.id = id;
+	}	
+	
+	public void resolverSudoku() {
+		
 	}
 	
+	public void confirmarColumna() {
+		
+	}
 	
-	
+	public void confirmarFila() {
+		
+	}
 }

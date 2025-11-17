@@ -6,7 +6,7 @@ public class Administrador extends Usuario {
         super(usuario, contraseña, idUsuario);
     }
 
-	/*Metodos de la clase Administrador*/
+	/*Metodos de la clase Administrador*/ 
 
     public String getRol() {
         return "admin";
