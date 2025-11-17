@@ -96,7 +96,7 @@ public class VentanaAdmin extends JFrame {
             }
         });
      
-}
+} 
 	
 	
 	private void abrirAjustes() {
