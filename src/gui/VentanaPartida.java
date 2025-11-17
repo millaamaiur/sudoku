@@ -102,7 +102,7 @@ public class VentanaPartida extends JFrame {
 		    for (int col = 0; col < 9; col++) {
 		        
 		        JTextField tf = (JTextField) celdas[fila * 9 + col];
-		        Casilla casilla = casillas[fila][col];
+		        Casilla casilla = casillas[fila][col]; 
 
 		        int valor = casilla.getValor();
 
