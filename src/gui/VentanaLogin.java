@@ -136,6 +136,9 @@ public class VentanaLogin extends JFrame {
 		btnLogin.setBounds(190, 203, 115, 21);
 		contentPane.add(btnLogin);
 		
+		getRootPane().setDefaultButton(btnLogin);
+
+		
 		
 		//boton para salir de ventanalogin
 		JButton btnSalir = new JButton("Salir");
