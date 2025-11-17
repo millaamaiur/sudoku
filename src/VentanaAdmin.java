@@ -42,7 +42,7 @@ public class VentanaAdmin extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 900, 700);
 		contentPane = new JPanel();
-		contentPane.setBackground(new Color(51, 204, 255));
+		contentPane.setBackground(new Color(128, 255, 255));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
 		setContentPane(contentPane);
