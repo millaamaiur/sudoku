@@ -132,19 +132,25 @@ public class VentanaLogin extends JFrame {
 				//usuario: usuario
 				//contraseña: password
 				*/
-				String rol = comprobarCredenciales(usuarioInput, contrasenyaInput);
+				String rol = comprobarCredenciales(usuarioInput, contrasenyaInput);//Los usuarios hay que crearlos en la base de datos pero de manera provisional:
 				if (!rol.equals("ERROR")) {
 				    if (rol.equals("ADMIN")) {
 				        VentanaAdmin admin = new VentanaAdmin();//aqui depende de cual sea te abre una ventana o otra
+				        txtUsuario.setText("");
+						passwordField.setText("");
 				        admin.setVisible(true);
 				    } else {
 				        VentanaPartida ventana = new VentanaPartida(VentanaLogin.this);
+				        txtUsuario.setText("");
+						passwordField.setText("");
 				        ventana.setVisible(true);
 				    }
 				    VentanaLogin.this.setVisible(false);
-				    
-				    
 				    //la nueva contraseña es: para usuario, password. Y para el administrador: admin, admin123-------------
+				}else {
+					JOptionPane.showMessageDialog(null, "Los datos estan mal puestos", "Error", JOptionPane.INFORMATION_MESSAGE);
+					txtUsuario.setText("");
+					passwordField.setText("");
 				}
 				
 			}
@@ -175,8 +181,8 @@ public class VentanaLogin extends JFrame {
 	}// en lugar de esto mejor añadir que se puedan diferenciar usuario y adminin del tiron
 	*/
 	
-	public String comprobarCredenciales(String usuario, String contraseña) {
-	    if (usuario.equals("admin") && contraseña.equals("admin123")) {
+	public String comprobarCredenciales(String usuario, String contraseña) {//Los usuarios hay que crearlos en la base de datos pero de manera provisional:
+	    if (usuario.equals("admin") && contraseña.equals("admin123")) {//asi que por ahora se quedan estos dos solo
 	        return "ADMIN"; //returneo admin y error, para que arriba al hacer el .equial sepa diferenciarlos bien
 	    } else if (usuario.equals("usuario") && contraseña.equals("password")) {
 	        return "JUGADOR";

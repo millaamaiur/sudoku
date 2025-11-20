@@ -57,18 +57,18 @@ public class VentanaAdmin extends JFrame {
 	
 	//botones de ventanadmin
 		botonAjustes = new JButton("Ajustes");
-		botonAjustes.setBackground(new Color(128, 128, 128));
+		botonAjustes.setBackground(new Color(192, 192, 192));
 		botonAjustes.setBounds(331, 187, 126, 66);
 		contentPane.add(botonAjustes);
 		
 		
 		botonCrearSudoku = new JButton("Crear Sudoku");
-		botonCrearSudoku.setBackground(new Color(128, 128, 128));
+		botonCrearSudoku.setBackground(new Color(192, 192, 192));
 		botonCrearSudoku.setBounds(331, 302, 126, 74);
 		contentPane.add(botonCrearSudoku);
         
         botonSalir = new JButton("Salir");
-        botonSalir.setBackground(new Color(128, 128, 128));
+        botonSalir.setBackground(new Color(192, 192, 192));
         botonSalir.setBounds(331, 413, 126, 79);
         contentPane.add(botonSalir);
        
