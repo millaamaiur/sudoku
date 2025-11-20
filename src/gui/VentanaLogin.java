@@ -118,6 +118,7 @@ public class VentanaLogin extends JFrame {
 				String usuarioInput = txtUsuario.getText();
 				String contrasenyaInput = String.copyValueOf(passwordField.getPassword());
 				
+				/*	---- ESTA PARTE NO ES UTIL SI USAMOS EL DIFERENCIADOR DE ADMIN Y USUARIO DEL TIRON (lo que hay abajo)
 				if (comprobarContrasenya(usuarioInput, contrasenyaInput)) {
 					
 					VentanaPartida ventana = new VentanaPartida(VentanaLogin.this);
@@ -130,6 +131,21 @@ public class VentanaLogin extends JFrame {
 				//Los usuarios hay que crearlos en la base de datos pero de manera provisional:
 				//usuario: usuario
 				//contraseña: password
+				*/
+				String rol = comprobarCredenciales(usuarioInput, contrasenyaInput);
+				if (!rol.equals("ERROR")) {
+				    if (rol.equals("ADMIN")) {
+				        VentanaAdmin admin = new VentanaAdmin();//aqui depende de cual sea te abre una ventana o otra
+				        admin.setVisible(true);
+				    } else {
+				        VentanaPartida ventana = new VentanaPartida(VentanaLogin.this);
+				        ventana.setVisible(true);
+				    }
+				    VentanaLogin.this.setVisible(false);
+				    
+				    
+				    //la nueva contraseña es: para usuario, password. Y para el administrador: admin, admin123-------------
+				}
 				
 			}
 		});
@@ -152,13 +168,26 @@ public class VentanaLogin extends JFrame {
 		
 	}
 	
+	/*
 	//Función para comprobar que la contraseña y el usuario son correctos
 	public Boolean comprobarContrasenya(String usuario, String contraseña) {
 		return (usuario.equals(usuarioTests) && contraseña.equals(passTests));
+	}// en lugar de esto mejor añadir que se puedan diferenciar usuario y adminin del tiron
+	*/
+	
+	public String comprobarCredenciales(String usuario, String contraseña) {
+	    if (usuario.equals("admin") && contraseña.equals("admin123")) {
+	        return "ADMIN"; //returneo admin y error, para que arriba al hacer el .equial sepa diferenciarlos bien
+	    } else if (usuario.equals("usuario") && contraseña.equals("password")) {
+	        return "JUGADOR";
+	    }
+	    return "ERROR";
 	}
 	
+	
+	
 	private void confirmarSalida() { // para confirmar la salida
-		int confirm = JOptionPane.showConfirmDialog(VentanaLogin.this, "¿Seguro que quieres cerrar el juego?","Salir",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE);
+		int confirm = JOptionPane.showConfirmDialog(null, "¿Seguro que quieres cerrar el juego?","Salir",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE);
 		if (confirm == JOptionPane.YES_OPTION) {
 			System.exit(0);
 		}

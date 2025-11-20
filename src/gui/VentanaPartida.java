@@ -6,7 +6,9 @@ import java.awt.event.KeyEvent;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
+import clases.Casilla;
 import clases.ControladorTimer;
+import clases.Sudoku;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -28,10 +30,11 @@ public class VentanaPartida extends JFrame {
 	private JButton btnIniciarTemp;
 
 	public VentanaPartida(VentanaLogin parent) {
+		Sudoku sudoku = crearSudokuPrueba();
 		this.parent = parent;
 		setTitle("Sudoku - Partida");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 900, 700);
+        setBounds(100, 100, 900, 700);
 		setLocationRelativeTo(null);
 		setResizable(false);
 
@@ -61,20 +64,7 @@ public class VentanaPartida extends JFrame {
 		
 		btnReiniciarTemp = new JButton("Reiniciar");
 		panelSuperCentral.add(btnReiniciarTemp);
-		contentPane.add(panelSuperior, BorderLayout.NORTH);
-		/*
-		// ----- PANEL CENTRAL (TABLERO) -----
-		panelTablero = new JPanel(new GridLayout(9, 9, 2, 2));
-		panelTablero.setBackground(new Color(192, 192, 192));
-
-		//Con este bucle for generamos las casillas. ES SOLO VISUAL
-		for (int i = 0; i < 81; i++) {
-			JTextField celda = new JTextField();
-			celda.setHorizontalAlignment(JTextField.CENTER);
-			celda.setFont(new Font("Segoe UI", Font.PLAIN, 18));
-			panelTablero.add(celda);
-		}  ESTO LO QUITO PARA BLOQUEAR LAS LETRAS EN EL SUDOKU
-*/		
+		contentPane.add(panelSuperior, BorderLayout.NORTH);	
 		
 		// ----- PANEL CENTRAL (TABLERO) ----- con las letras bloqueadas
 		panelTablero = new JPanel(new GridLayout(9, 9, 2, 2));
@@ -103,7 +93,32 @@ public class VentanaPartida extends JFrame {
 		
 		contentPane.add(panelTablero, BorderLayout.CENTER);
 
-		//------------------------------------------------------------------------
+		//---------------------------------------------------------------
+		// Cargar el sudoku de prueba EN LAS CELDAS YA CREADAS
+		Casilla[][] casillas = sudoku.getTablero();
+		Component[] celdas = panelTablero.getComponents(); //esta linea lo que hace es coger cada uno de los textFields que hemos creado arriba y meterlo a un array
+
+		for (int fila = 0; fila < 9; fila++) {
+		    for (int col = 0; col < 9; col++) {
+		        
+		        JTextField tf = (JTextField) celdas[fila * 9 + col];
+		        Casilla casilla = casillas[fila][col]; 
+
+		        int valor = casilla.getValor();
+
+		        if (valor != 0) {
+		            tf.setText(String.valueOf(valor));
+		            tf.setEditable(false);
+		            tf.setBackground(new Color(220, 220, 220));
+		            tf.setFont(new Font("Segoe UI", Font.BOLD, 18));
+		        } else {
+		            tf.setText("");
+		            tf.setEditable(true);
+		        }
+		    }
+		}
+		//---------------------------------------------------------------
+
 		
 		//Panel de abajo (Botones)
 		//Aqui se crea el panel y todos los botones
@@ -156,12 +171,46 @@ public class VentanaPartida extends JFrame {
 				timer.stop();
 			}
 		});
-		
-		// ----- BOTON RESET TEMP -----
+		// ----- BOTON REINICIAR TEMP -----
 		btnReiniciarTemp.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				timer.reset();
 			}
 		});
+	}
+
+	// ---------- CREAR SUDOKU DE PRUEBA (SIN MOVER TUS COMENTARIOS) ----------
+	public Sudoku crearSudokuPrueba() {
+
+		int[][] tableroValores = {
+			{5, 3, 0, 0, 7, 0, 0, 0, 0},
+			{6, 0, 0, 1, 9, 5, 0, 0, 0},
+			{0, 9, 8, 0, 0, 0, 0, 6, 0},
+			{8, 0, 0, 0, 6, 0, 0, 0, 3},
+			{4, 0, 0, 8, 0, 3, 0, 0, 1},
+			{7, 0, 0, 0, 2, 0, 0, 0, 6},
+			{0, 6, 0, 0, 0, 0, 2, 8, 0},
+			{0, 0, 0, 4, 1, 9, 0, 0, 5},
+			{0, 0, 0, 0, 8, 0, 0, 7, 9}
+		};
+
+		Casilla[][] tablero = new Casilla[9][9];
+
+		for (int fila = 0; fila < 9; fila++) {
+			for (int col = 0; col < 9; col++) {
+
+				int valor = tableroValores[fila][col];
+				boolean editable = (valor == 0);
+
+				tablero[fila][col] = new Casilla(valor, fila, col, editable);
+			}
+		}
+
+		return new Sudoku(tablero, null, "Normal", 1);
+	}
+
+	public void guardarAjustes(String dificultad, int volumen, Color colorFondo) {
+		// TODO Auto-generated method stub
+		
 	}
 }

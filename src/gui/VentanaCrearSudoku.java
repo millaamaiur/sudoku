@@ -35,7 +35,7 @@ public class VentanaCrearSudoku extends JFrame {
 	 */
 	public VentanaCrearSudoku(VentanaAdmin parent) {
 		this.parent = parent;
-		setTitle("Sudoku - Partida");
+		setTitle("Sudoku - Crear Sudoku");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 900, 700);
 		setLocationRelativeTo(null);

@@ -1,5 +1,11 @@
 package gui;
+/*<<<<<<< HEAD
+=======
+
+>>>>>>> branch 'master' of git@github.com:millaamaiur/sudoku.git*/
+
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -19,7 +25,7 @@ public class VentanaAdmin extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-
+	private JButton botonAjustes, botonCrearSudoku, botonSalir;
 	/**
 	 * Launch the application.
 	 */
@@ -43,24 +49,27 @@ public class VentanaAdmin extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 900, 700);
 		contentPane = new JPanel();
-		contentPane.setBackground(new Color(128, 255, 255));
+		contentPane.setBackground(new Color(255, 255, 255));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 	
 	//botones de ventanadmin
-		JButton botonAjustes = new JButton("Ajustes");
-		botonAjustes.setBounds(321, 213, 126, 66);
+		botonAjustes = new JButton("Ajustes");
+		botonAjustes.setBackground(new Color(128, 128, 128));
+		botonAjustes.setBounds(331, 187, 126, 66);
 		contentPane.add(botonAjustes);
 		
 		
-		JButton botonCrearSudoku = new JButton("Crear Sudoku");
-		botonCrearSudoku.setBounds(321, 315, 126, 74);
+		botonCrearSudoku = new JButton("Crear Sudoku");
+		botonCrearSudoku.setBackground(new Color(128, 128, 128));
+		botonCrearSudoku.setBounds(331, 302, 126, 74);
 		contentPane.add(botonCrearSudoku);
         
-        JButton botonSalir = new JButton("Salir");
-        botonSalir.setBounds(321, 428, 126, 79);
+        botonSalir = new JButton("Salir");
+        botonSalir.setBackground(new Color(128, 128, 128));
+        botonSalir.setBounds(331, 413, 126, 79);
         contentPane.add(botonSalir);
        
         
@@ -77,27 +86,10 @@ public class VentanaAdmin extends JFrame {
 	}
 	
 	private void configurarAcciones() {
-        AbstractButton botonAjustes = null;
-		botonAjustes.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                abrirAjustes();
-            }
-        });
-        
-        AbstractButton botonCrearSudoku = null;
-		botonCrearSudoku.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                abrirCrearSudoku();
-            }
-        });
-        AbstractButton botonSalir = null;
-		botonSalir.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                salir();
-            }
-        });
-     
-} 
+		botonAjustes.addActionListener(e -> abrirAjustes());      
+        botonCrearSudoku.addActionListener(e -> abrirCrearSudoku()); 
+        botonSalir.addActionListener(e -> salir());               
+    }
 	
 	
 	private void abrirAjustes() {
