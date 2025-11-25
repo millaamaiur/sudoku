@@ -2,6 +2,7 @@ package gui;
 
 import java.awt.EventQueue;
 import java.awt.Font;
+import java.awt.Image;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -11,6 +12,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JPasswordField;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -49,6 +51,9 @@ public class VentanaLogin extends JFrame {
 		setBounds(100, 100, 500, 400);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		ImageIcon icon = new ImageIcon(getClass().getResource("/gui/logo.png"));
+		Image img = icon.getImage().getScaledInstance(32, 32, Image.SCALE_SMOOTH);
+		setIconImage(img);
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		

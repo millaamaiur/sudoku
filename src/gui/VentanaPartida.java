@@ -39,6 +39,10 @@ public class VentanaPartida extends JFrame {
         setBounds(100, 100, 900, 700);
 		setLocationRelativeTo(null);
 		setResizable(false);
+		
+		ImageIcon icon = new ImageIcon(getClass().getResource("/gui/logo.png"));
+		Image img = icon.getImage().getScaledInstance(32, 32, Image.SCALE_SMOOTH);
+		setIconImage(img);
 
 		contentPane = new JPanel(new BorderLayout(10, 10));
 		contentPane.setBorder(new EmptyBorder(10, 10, 10, 10));

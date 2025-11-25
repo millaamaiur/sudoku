@@ -6,6 +6,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import java.awt.GridLayout;
+import java.awt.Image;
 import java.awt.FlowLayout;
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -18,6 +19,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JSlider;
@@ -38,6 +40,9 @@ public class VentanaAjustes extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		JPanel contentPane = new JPanel();
+		ImageIcon icon = new ImageIcon(getClass().getResource("/gui/logo.png"));
+		Image img = icon.getImage().getScaledInstance(32, 32, Image.SCALE_SMOOTH);
+		setIconImage(img);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
 		setContentPane(contentPane);

@@ -8,6 +8,7 @@ import java.awt.EventQueue;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -16,6 +17,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
 public class VentanaCrearSudoku extends JFrame {
@@ -40,6 +42,10 @@ public class VentanaCrearSudoku extends JFrame {
 		setBounds(100, 100, 900, 700);
 		setLocationRelativeTo(null);
 		setResizable(false);
+		
+		ImageIcon icon = new ImageIcon(getClass().getResource("/gui/logo.png"));
+		Image img = icon.getImage().getScaledInstance(32, 32, Image.SCALE_SMOOTH);
+		setIconImage(img);
 
 		contentPane = new JPanel(new BorderLayout(10, 10));
 		contentPane.setBorder(new EmptyBorder(10, 10, 10, 10));

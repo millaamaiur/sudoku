@@ -8,10 +8,12 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.EventQueue;
 import java.awt.Font;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.AbstractButton;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -52,6 +54,10 @@ public class VentanaAdmin extends JFrame {
 		contentPane.setBackground(new Color(255, 255, 255));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
+		ImageIcon icon = new ImageIcon(getClass().getResource("/gui/logo.png"));
+		Image img = icon.getImage().getScaledInstance(32, 32, Image.SCALE_SMOOTH);
+		setIconImage(img);
+		
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 	
