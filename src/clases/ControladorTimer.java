@@ -50,7 +50,6 @@ public class ControladorTimer implements Runnable{
 				Thread.sleep(1000);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
-				System.out.println("Temporizador detenido");
 			}
 			
 			if (reiniciar) {
