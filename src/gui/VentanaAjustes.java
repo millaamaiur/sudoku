@@ -157,7 +157,7 @@ public class VentanaAjustes extends JFrame {
 		gbl_panelAtras.columnWeights = new double[]{0.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0};
 		gbl_panelAtras.rowWeights = new double[]{1.0, 0.0};
 		panelAtras.setLayout(gbl_panelAtras);
-		 
+		//comentario para el push
 		Color colorPadre = parent.getContentPane().getBackground();
 		panelColor.setBackground(colorPadre);
         panelDif.setBackground(colorPadre);
