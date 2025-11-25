@@ -28,6 +28,8 @@ public class VentanaPartida extends JFrame {
 	private JButton btnReiniciarTemp;
 	private JButton btnPararTemp;
 	private JButton btnIniciarTemp;
+	private JPanel panelSuperCentral;
+	private JPanel panelSuperior;
 
 	public VentanaPartida(VentanaLogin parent) {
 		Sudoku sudoku = crearSudokuPrueba();
@@ -44,12 +46,12 @@ public class VentanaPartida extends JFrame {
 
 		//Panel de arriba (Dificultad y tiempo)
 		//Aqui se crea el panel y los labels de dificultad y tiempo
-		JPanel panelSuperior = new JPanel(new BorderLayout());
+		panelSuperior = new JPanel(new BorderLayout());
 		lblDificultad = new JLabel("Dificultad: Normal");
 		lblDificultad.setFont(new Font("Segoe UI", Font.BOLD, 16));
 		lblTiempo = new JLabel("00:00"); 
 		lblTiempo.setFont(new Font("Segoe UI", Font.BOLD, 16));
-		JPanel panelSuperCentral = new JPanel(new FlowLayout());
+		panelSuperCentral = new JPanel(new FlowLayout());
 
 		//Aqui se añaden los labels al panel y el panel al borderLayout (NORTE)
 		panelSuperior.add(lblDificultad, BorderLayout.WEST);
@@ -226,7 +228,22 @@ public class VentanaPartida extends JFrame {
 	public JPanel getPanelControles() {
 	    return panelControles;
 	}
-	
+
+	public JPanel getPanelSuperCentral() {
+		return panelSuperCentral;
+	}
+
+	public void setPanelSuperCentral(JPanel panelSuperCentral) {
+		this.panelSuperCentral = panelSuperCentral;
+	}
+
+	public JPanel getPanelSuperior() {
+		return panelSuperior;
+	}
+
+	public void setPanelSuperior(JPanel panelSuperior) {
+		this.panelSuperior = panelSuperior;
+	}
 	
 }
 /*

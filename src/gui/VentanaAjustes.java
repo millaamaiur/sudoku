@@ -27,6 +27,7 @@ public class VentanaAjustes extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private VentanaPartida parent;
 	private JPanel panelSonido;
+	private JPanel panelAtras;
 	
 	public VentanaAjustes() {
 	       this(null); 
@@ -125,6 +126,13 @@ public class VentanaAjustes extends JFrame {
                     parent.getContentPane().setBackground(nuevoColor);
                     parent.getPanelTablero().setBackground(nuevoColor);
                     parent.getPanelControles().setBackground(nuevoColor);
+                    parent.getPanelSuperCentral().setBackground(nuevoColor);
+                    parent.getPanelSuperior().setBackground(nuevoColor);
+                    panelColor.setBackground(nuevoColor);
+                    panelDif.setBackground(nuevoColor);
+                    panelSonido.setBackground(nuevoColor);
+                    panelAtras.setBackground(nuevoColor);
+                    
 	            }
 			}
 	      }
@@ -137,7 +145,7 @@ public class VentanaAjustes extends JFrame {
 
 		
 		
-		JPanel panelAtras = new JPanel();
+		panelAtras = new JPanel();
 		contentPane.add(panelAtras);
 		GridBagLayout gbl_panelAtras = new GridBagLayout();
 		gbl_panelAtras.columnWidths = new int[] {0, 0, 0, 0, 0, 0, 0, 0};
