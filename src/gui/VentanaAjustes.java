@@ -27,6 +27,10 @@ public class VentanaAjustes extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private VentanaPartida parent;
 	private JPanel panelSonido;
+	
+	 public VentanaAjustes() {
+	        this(null); 
+	       }
 
 	public VentanaAjustes(VentanaPartida parent) {
 		this.parent = parent;

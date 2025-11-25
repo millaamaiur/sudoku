@@ -213,4 +213,11 @@ public class VentanaPartida extends JFrame {
 		// TODO Auto-generated method stub
 		
 	}
+	
+	
 }
+/*
+
+
+
+*/
