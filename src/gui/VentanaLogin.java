@@ -140,7 +140,7 @@ public class VentanaLogin extends JFrame {
 				String rol = comprobarCredenciales(usuarioInput, contrasenyaInput);//Los usuarios hay que crearlos en la base de datos pero de manera provisional:
 				if (!rol.equals("ERROR")) {
 				    if (rol.equals("ADMIN")) {
-				        VentanaAdmin admin = new VentanaAdmin();//aqui depende de cual sea te abre una ventana o otra
+				        VentanaAdmin admin = new VentanaAdmin(VentanaLogin.this);//aqui depende de cual sea te abre una ventana o otra
 				        txtUsuario.setText("");
 						passwordField.setText("");
 				        admin.setVisible(true);
