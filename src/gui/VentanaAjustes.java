@@ -28,8 +28,8 @@ public class VentanaAjustes extends JFrame {
 	private VentanaPartida parent;
 	private JPanel panelSonido;
 	
-	 public VentanaAjustes() {
-	        this(null); 
+	public VentanaAjustes() {
+	       this(null); 
 	       }
 
 	public VentanaAjustes(VentanaPartida parent) {
@@ -120,8 +120,14 @@ public class VentanaAjustes extends JFrame {
 	            if (nuevoColor != null) {
 	                getContentPane().setBackground(nuevoColor);
 	                panelSonido.setBackground(nuevoColor);
+	            
+                if (parent != null) {
+                    parent.getContentPane().setBackground(nuevoColor);
+                    parent.getPanelTablero().setBackground(nuevoColor);
+                    parent.getPanelControles().setBackground(nuevoColor);
 	            }
 			}
+	      }
 		});
 		GridBagConstraints gbc_btnColor = new GridBagConstraints();
 		gbc_btnColor.insets = new Insets(0, 0, 0, 5);

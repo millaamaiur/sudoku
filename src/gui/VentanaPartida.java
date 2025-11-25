@@ -125,6 +125,11 @@ public class VentanaPartida extends JFrame {
 		panelControles = new JPanel(new FlowLayout(FlowLayout.CENTER, 20, 10));
 
 		JButton btnComprobar = new JButton("Comprobar");
+		btnComprobar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+			}
+		});
 		JButton btnReiniciar = new JButton("Reiniciar");
 		JButton btnResolver = new JButton("Resolver");
 		JButton btnAjustes = new JButton("Ajustes");
@@ -212,6 +217,14 @@ public class VentanaPartida extends JFrame {
 	public void guardarAjustes(String dificultad, int volumen, Color colorFondo) {
 		// TODO Auto-generated method stub
 		
+	}
+	
+	public JPanel getPanelTablero() {
+	    return panelTablero;
+	}
+
+	public JPanel getPanelControles() {
+	    return panelControles;
 	}
 	
 	
