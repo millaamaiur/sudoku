@@ -124,11 +124,11 @@ public class VentanaAjustes extends JFrame {
 	                panelSonido.setBackground(nuevoColor);
 	            
                 if (parent != null) {
-                    parent.getContentPane().setBackground(nuevoColor);
+                    /*parent.getContentPane().setBackground(nuevoColor);
                     parent.getPanelTablero().setBackground(nuevoColor);
                     parent.getPanelControles().setBackground(nuevoColor);
                     parent.getPanelSuperCentral().setBackground(nuevoColor);
-                    parent.getPanelSuperior().setBackground(nuevoColor);
+                    parent.getPanelSuperior().setBackground(nuevoColor);*/
                     panelColor.setBackground(nuevoColor);
                     panelDif.setBackground(nuevoColor);
                     panelSonido.setBackground(nuevoColor);

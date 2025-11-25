@@ -222,7 +222,12 @@ public class VentanaPartida extends JFrame {
 
 	public void guardarAjustes(String dificultad, int volumen, Color colorFondo) {
 		// TODO Auto-generated method stub
-		
+		lblDificultad.setText("Dificultad: " + dificultad);
+		 this.getContentPane().setBackground(colorFondo);
+         this.getPanelTablero().setBackground(colorFondo);
+         this.getPanelControles().setBackground(colorFondo);
+         this.getPanelSuperCentral().setBackground(colorFondo);
+         this.getPanelSuperior().setBackground(colorFondo);
 	}
 	
 	public JPanel getPanelTablero() {
