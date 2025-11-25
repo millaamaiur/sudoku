@@ -40,7 +40,6 @@ public class VentanaAjustes extends JFrame {
 		Image img = icon.getImage().getScaledInstance(32, 32, Image.SCALE_SMOOTH);
 		setIconImage(img);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		setResizable(false);
 
 		setContentPane(contentPane);
 		contentPane.setLayout(new GridLayout(4, 0, 0, 0));
