@@ -43,6 +43,7 @@ public class VentanaAdmin extends JFrame {
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(255, 255, 255));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setResizable(false);
 
 		ImageIcon icon = new ImageIcon(getClass().getResource("/gui/logo.png"));
 		Image img = icon.getImage().getScaledInstance(32, 32, Image.SCALE_SMOOTH);

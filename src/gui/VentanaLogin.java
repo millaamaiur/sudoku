@@ -54,6 +54,7 @@ public class VentanaLogin extends JFrame {
 		setIconImage(img);
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		setResizable(false);
 		
 		
 		//titulo de ventana
