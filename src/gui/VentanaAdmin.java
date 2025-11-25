@@ -90,8 +90,8 @@ public class VentanaAdmin extends JFrame {
 	
 	private void abrirAjustes() {
         // Cierra esta ventana y abre ajustes
-       
-        VentanaAjustes ajustes = new VentanaAjustes();
+        VentanaPartida parti = new VentanaPartida(parent);
+        VentanaAjustes ajustes = new VentanaAjustes(parti);
         ajustes.setVisible(true);
         dispose();
     }

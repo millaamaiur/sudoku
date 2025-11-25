@@ -42,8 +42,6 @@ public class VentanaLogin extends JFrame {
 			}
 		});
 	}
-
-	
 	
 	public VentanaLogin() {
 		//Crear content pane (Por defecto)

@@ -30,10 +30,6 @@ public class VentanaAjustes extends JFrame {
 	private VentanaPartida parent;
 	private JPanel panelSonido;
 	private JPanel panelAtras;
-	
-	public VentanaAjustes() {
-	       this(null); 
-	       }
 
 	public VentanaAjustes(VentanaPartida parent) {
 		this.parent = parent;
