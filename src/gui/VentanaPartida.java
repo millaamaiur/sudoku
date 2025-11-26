@@ -94,6 +94,21 @@ public class VentanaPartida extends JFrame {
 		        }
 		    });
 		    
+		    int top = 1, left = 1, bottom = 1, right = 1;
+
+		    // Líneas horizontales gruesas
+		    if (i < 9) top = 5;                     // borde superior
+		    if (i >= 27 && i < 36) top = 5;         // línea entre fila 3-4
+		    if (i >= 54 && i < 63) top = 5;         // línea entre fila 6-7
+		    if (i >= 72) bottom = 5;                // borde inferior
+
+		    // Líneas verticales gruesas
+		    if (i % 9 == 0) left = 5;               // borde izquierdo
+		    if (i % 9 == 3) left = 5;               // línea entre col 3-4
+		    if (i % 9 == 6) left = 5;               // línea entre col 6-7
+		    if (i % 9 == 8) right = 5;              // borde derecho
+
+		    celda.setBorder(BorderFactory.createMatteBorder(top, left, bottom, right, Color.BLACK));
 		    panelTablero.add(celda);
 		}
 		
