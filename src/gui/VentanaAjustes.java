@@ -39,8 +39,7 @@ public class VentanaAjustes extends JFrame {
 		ImageIcon icon = new ImageIcon(getClass().getResource("/gui/logo.png"));
 		Image img = icon.getImage().getScaledInstance(32, 32, Image.SCALE_SMOOTH);
 		setIconImage(img);
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		setResizable(false);
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));		
 
 		setContentPane(contentPane);
 		contentPane.setLayout(new GridLayout(4, 0, 0, 0));
@@ -112,6 +111,9 @@ public class VentanaAjustes extends JFrame {
 		gbc_lblColor.gridy = 0;
 		panelColor.add(lblColor, gbc_lblColor);
 		
+		
+		
+		
 		JButton btnColor = new JButton("Cambiar");
 		btnColor.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -125,11 +127,11 @@ public class VentanaAjustes extends JFrame {
 	                panelSonido.setBackground(nuevoColor);
 	            
                 if (parent != null) {
-                    parent.getContentPane().setBackground(nuevoColor);
+                    /*parent.getContentPane().setBackground(nuevoColor);
                     parent.getPanelTablero().setBackground(nuevoColor);
                     parent.getPanelControles().setBackground(nuevoColor);
                     parent.getPanelSuperCentral().setBackground(nuevoColor);
-                    parent.getPanelSuperior().setBackground(nuevoColor);
+                    parent.getPanelSuperior().setBackground(nuevoColor);*/
                     panelColor.setBackground(nuevoColor);
                     panelDif.setBackground(nuevoColor);
                     panelSonido.setBackground(nuevoColor);
@@ -155,6 +157,12 @@ public class VentanaAjustes extends JFrame {
 		gbl_panelAtras.columnWeights = new double[]{0.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0};
 		gbl_panelAtras.rowWeights = new double[]{1.0, 0.0};
 		panelAtras.setLayout(gbl_panelAtras);
+		//comentario para el push
+		Color colorPadre = parent.getContentPane().getBackground();
+		panelColor.setBackground(colorPadre);
+        panelDif.setBackground(colorPadre);
+        panelSonido.setBackground(colorPadre);
+        panelAtras.setBackground(colorPadre);
 		
 		JButton btnVolver = new JButton("Volver");
 		btnVolver.addActionListener(new ActionListener() {
@@ -183,7 +191,7 @@ public class VentanaAjustes extends JFrame {
 		        JOptionPane.showMessageDialog(null, mensaje,"Ajustes Guardados", JOptionPane.INFORMATION_MESSAGE);
 		        
 		        parent.setVisible(true);
-		        dispose();
+		        VentanaAjustes.this.setVisible(false);
 			}
 		});
 		GridBagConstraints gbc_btnGuardar = new GridBagConstraints();
