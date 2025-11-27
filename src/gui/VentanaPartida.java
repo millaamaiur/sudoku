@@ -32,13 +32,14 @@ public class VentanaPartida extends JFrame {
 	private JPanel panelSuperior;
 
 	public VentanaPartida(VentanaLogin parent) {
-		Sudoku sudoku = crearSudokuPrueba();
 		this.parent = parent;
 		setTitle("Sudoku - Partida");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 900, 700);
 		setLocationRelativeTo(null);
 		setResizable(false);
+		
+		Sudoku sudoku = crearSudokuPrueba();
 		
 		ImageIcon icon = new ImageIcon(getClass().getResource("/gui/logo.png"));
 		Image img = icon.getImage().getScaledInstance(32, 32, Image.SCALE_SMOOTH);
@@ -89,24 +90,24 @@ public class VentanaPartida extends JFrame {
 		            JTextField source = (JTextField) e.getSource();
 		            // Solo permitir numeros del 1 al 9
 		            if (!(c >= '1' && c <= '9') || source.getText().length() >= 1) {
-		                e.consume(); // Bloquear el carácter
+		                e.consume(); // Si no es un numero o ya hay un numero en la casilla el consume lo que hace es no escribir en la casilla
 		            }
 		        }
 		    });
 		    
-		    int top = 1, left = 1, bottom = 1, right = 1;
+		    int top = 1, left = 1, bottom = 1, right = 1; // por defecto todos los bordes a 1 de grosor
 
-		    // Líneas horizontales gruesas
-		    if (i < 9) top = 5;                     // borde superior
-		    if (i >= 27 && i < 36) top = 5;         // línea entre fila 3-4
-		    if (i >= 54 && i < 63) top = 5;         // línea entre fila 6-7
-		    if (i >= 72) bottom = 5;                // borde inferior
+		    // Líneas horizontales gruesas. Si cumple alguna condición de las de abajo se cambia el grosor a 5
+		    if (i < 9) top = 5;
+		    if (i >= 27 && i < 36) top = 5;
+		    if (i >= 54 && i < 63) top = 5;
+		    if (i >= 72) bottom = 5;
 
-		    // Líneas verticales gruesas
-		    if (i % 9 == 0) left = 5;               // borde izquierdo
-		    if (i % 9 == 3) left = 5;               // línea entre col 3-4
-		    if (i % 9 == 6) left = 5;               // línea entre col 6-7
-		    if (i % 9 == 8) right = 5;              // borde derecho
+		    // Líneas verticales gruesas. Si cumple alguna condición de las de abajo se cambia el grosor a 5
+		    if (i % 9 == 0) left = 5;
+		    if (i % 9 == 3) left = 5;
+		    if (i % 9 == 6) left = 5;
+		    if (i % 9 == 8) right = 5;
 
 		    celda.setBorder(BorderFactory.createMatteBorder(top, left, bottom, right, Color.BLACK));
 		    panelTablero.add(celda);
@@ -123,7 +124,7 @@ public class VentanaPartida extends JFrame {
 		    for (int col = 0; col < 9; col++) {
 		        
 		        JTextField tf = (JTextField) celdas[fila * 9 + col];
-		        Casilla casilla = casillas[fila][col]; 
+		        Casilla casilla = casillas[fila][col];
 
 		        int valor = casilla.getValor();
 
