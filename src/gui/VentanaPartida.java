@@ -156,6 +156,32 @@ public class VentanaPartida extends JFrame {
 		});
 		JButton btnReiniciar = new JButton("Reiniciar");
 		JButton btnResolver = new JButton("Resolver");
+		btnResolver.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Casilla[][] casillas = sudoku.getSolucion();
+				Component[] celdas = panelTablero.getComponents(); //esta linea lo que hace es coger cada uno de los textFields que hemos creado arriba y meterlo a un array
+
+				for (int fila = 0; fila < 9; fila++) {
+				    for (int col = 0; col < 9; col++) {
+				        
+				        JTextField tf = (JTextField) celdas[fila * 9 + col];
+				        Casilla casilla = casillas[fila][col];
+
+				        int valor = casilla.getValor();
+
+				        if (valor != 0) {
+				            tf.setText(String.valueOf(valor));
+				            tf.setEditable(false);
+				            tf.setBackground(new Color(220, 220, 220));
+				            tf.setFont(new Font("Segoe UI", Font.BOLD, 18));
+				        } else {
+				            tf.setText("");
+				            tf.setEditable(true);
+				        }
+				    }
+				}
+			}
+		});
 		JButton btnAjustes = new JButton("Ajustes");
 		JButton btnVolver = new JButton("Volver");
 		
