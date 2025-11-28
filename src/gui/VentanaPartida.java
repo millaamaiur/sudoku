@@ -9,11 +9,13 @@ import javax.swing.border.EmptyBorder;
 import clases.Casilla;
 import clases.ControladorTimer;
 import clases.Sudoku;
+import sudokuBDFunciones.FuncionesSudoku;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import sudokuBDFunciones.FuncionesSudoku;
 
 public class VentanaPartida extends JFrame {
 
@@ -39,7 +41,7 @@ public class VentanaPartida extends JFrame {
 		setLocationRelativeTo(null);
 		setResizable(false);
 		
-		Sudoku sudoku = crearSudokuPrueba();
+		Sudoku sudoku = FuncionesSudoku.generarSudokuInicial();
 		
 		ImageIcon icon = new ImageIcon(getClass().getResource("/gui/logo.png"));
 		Image img = icon.getImage().getScaledInstance(32, 32, Image.SCALE_SMOOTH);
@@ -204,36 +206,6 @@ public class VentanaPartida extends JFrame {
 				timer.reset();
 			}
 		});
-	}
-
-	// ---------- CREAR SUDOKU DE PRUEBA (SIN MOVER TUS COMENTARIOS) ----------
-	public Sudoku crearSudokuPrueba() {
-
-		int[][] tableroValores = {
-			{5, 3, 0, 0, 7, 0, 0, 0, 0},
-			{6, 0, 0, 1, 9, 5, 0, 0, 0},
-			{0, 9, 8, 0, 0, 0, 0, 6, 0},
-			{8, 0, 0, 0, 6, 0, 0, 0, 3},
-			{4, 0, 0, 8, 0, 3, 0, 0, 1},
-			{7, 0, 0, 0, 2, 0, 0, 0, 6},
-			{0, 6, 0, 0, 0, 0, 2, 8, 0},
-			{0, 0, 0, 4, 1, 9, 0, 0, 5},
-			{0, 0, 0, 0, 8, 0, 0, 7, 9}
-		};
-
-		Casilla[][] tablero = new Casilla[9][9];
-
-		for (int fila = 0; fila < 9; fila++) {
-			for (int col = 0; col < 9; col++) {
-
-				int valor = tableroValores[fila][col];
-				boolean editable = (valor == 0);
-
-				tablero[fila][col] = new Casilla(valor, fila, col, editable);
-			}
-		}
-
-		return new Sudoku(tablero, null, "Normal", 1);
 	}
 
 	public void guardarAjustes(String dificultad, int volumen, Color colorFondo) {
