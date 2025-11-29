@@ -88,4 +88,29 @@ public class FuncionesSudoku {
 	    
 	    return matriz;
 	}
+	
+	public static String comprobarCredenciales(String usuario, String contraseña) {
+		int idBD = -1;
+		String usuarioBD = "";
+		String contraseñaBD = "";
+		String rolBD = "ERROR";
+		
+		try (Connection conn = SQLConnect.getConnection()) {
+			
+			Statement stmnt = conn.createStatement();
+			
+			String sql = "SELECT IdUsuario, NombreUsuario, Password, Rol FROM Usuarios WHERE NombreUsuario = '" + usuario + "' AND Password = '" + contraseña + "'";
+			
+			ResultSet rs = stmnt.executeQuery(sql);
+			
+			if (rs.next()) {
+	            rolBD = rs.getString("Rol");
+			}
+			
+			} catch (SQLException e) {
+			System.out.println("Error: " + e.getMessage());
+			return rolBD;
+		}
+		return rolBD;
+	}
 }

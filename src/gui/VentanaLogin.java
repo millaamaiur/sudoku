@@ -18,6 +18,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import sudokuBDFunciones.FuncionesSudoku;
 
 public class VentanaLogin extends JFrame {
 	//Atributos de la ventana login. Es la ventana padre (Por eso tiene main) 
@@ -122,21 +123,8 @@ public class VentanaLogin extends JFrame {
 				String usuarioInput = txtUsuario.getText();
 				String contrasenyaInput = String.copyValueOf(passwordField.getPassword());
 				
-				/*	---- ESTA PARTE NO ES UTIL SI USAMOS EL DIFERENCIADOR DE ADMIN Y USUARIO DEL TIRON (lo que hay abajo)
-				if (comprobarContrasenya(usuarioInput, contrasenyaInput)) {
-					
-					VentanaPartida ventana = new VentanaPartida(VentanaLogin.this);
-					ventana.setVisible(true);
-					VentanaLogin.this.setVisible(false);
-				}else {
-					JOptionPane.showMessageDialog(VentanaLogin.this, "Error, usuario o contraseña incorrectos");
-				}
 				
-				//Los usuarios hay que crearlos en la base de datos pero de manera provisional:
-				//usuario: usuario
-				//contraseña: password
-				*/
-				String rol = comprobarCredenciales(usuarioInput, contrasenyaInput);//Los usuarios hay que crearlos en la base de datos pero de manera provisional:
+				String rol = FuncionesSudoku.comprobarCredenciales(usuarioInput, contrasenyaInput);//Los usuarios hay que crearlos en la base de datos pero de manera provisional:
 				if (!rol.equals("ERROR")) {
 				    if (rol.equals("ADMIN")) {
 				        VentanaAdmin admin = new VentanaAdmin(VentanaLogin.this);//aqui depende de cual sea te abre una ventana o otra
@@ -176,25 +164,7 @@ public class VentanaLogin extends JFrame {
 		btnSalir.setBounds(10, 332, 98, 21);
 		contentPane.add(btnSalir);
 		
-	}
-	
-	/*
-	//Función para comprobar que la contraseña y el usuario son correctos
-	public Boolean comprobarContrasenya(String usuario, String contraseña) {
-		return (usuario.equals(usuarioTests) && contraseña.equals(passTests));
-	}// en lugar de esto mejor añadir que se puedan diferenciar usuario y adminin del tiron
-	*/
-	
-	public String comprobarCredenciales(String usuario, String contraseña) {//Los usuarios hay que crearlos en la base de datos pero de manera provisional:
-	    if (usuario.equals("admin") && contraseña.equals("admin123")) {//asi que por ahora se quedan estos dos solo
-	        return "ADMIN"; //returneo admin y error, para que arriba al hacer el .equial sepa diferenciarlos bien
-	    } else if (usuario.equals("usuario") && contraseña.equals("password")) {
-	        return "JUGADOR";
-	    }
-	    return "ERROR";
-	}
-	
-	
+	}	
 	
 	private void confirmarSalida() { // para confirmar la salida
 		int confirm = JOptionPane.showConfirmDialog(null, "¿Seguro que quieres cerrar el juego?","Salir",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE);
