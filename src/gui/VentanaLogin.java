@@ -58,7 +58,7 @@ public class VentanaLogin extends JFrame {
 		setResizable(false);
 		
 		
-		//titulo de ventana
+		//Titulo de ventana
 		JLabel lblTitulo = new JLabel("SUDOKU GAME");
 		lblTitulo.setBounds(180, 50, 150, 30);
 		lblTitulo.setFont(new java.awt.Font("Arial", Font.BOLD, 18));
@@ -124,7 +124,7 @@ public class VentanaLogin extends JFrame {
 				String contrasenyaInput = String.copyValueOf(passwordField.getPassword());
 				
 				
-				String rol = FuncionesSudoku.comprobarCredenciales(usuarioInput, contrasenyaInput);//Los usuarios hay que crearlos en la base de datos pero de manera provisional:
+				String rol = FuncionesSudoku.comprobarCredenciales(usuarioInput, contrasenyaInput);
 				if (!rol.equals("ERROR")) {
 				    if (rol.equals("ADMIN")) {
 				        VentanaAdmin admin = new VentanaAdmin(VentanaLogin.this);//aqui depende de cual sea te abre una ventana o otra
@@ -138,9 +138,8 @@ public class VentanaLogin extends JFrame {
 				        ventana.setVisible(true);
 				    }
 				    VentanaLogin.this.setVisible(false);
-				    //la nueva contraseña es: para usuario, password. Y para el administrador: admin, admin123-------------
 				}else {
-					JOptionPane.showMessageDialog(null, "Los datos estan mal puestos", "Error", JOptionPane.INFORMATION_MESSAGE);
+					JOptionPane.showMessageDialog(null, "Credenciales incorrectas", "Error", JOptionPane.INFORMATION_MESSAGE);
 					txtUsuario.setText("");
 					passwordField.setText("");
 				}
