@@ -85,6 +85,15 @@ public class VentanaPartida extends JFrame {
 		    celda.setHorizontalAlignment(JTextField.CENTER);
 		    celda.setFont(new Font("Segoe UI", Font.PLAIN, 18));
 		    
+		    celda.setCaret(new javax.swing.text.DefaultCaret() {
+				private static final long serialVersionUID = 1L;
+
+				@Override
+		        public void setVisible(boolean v) {
+		            super.setVisible(false); // Siempre lo mantiene invisible
+		        }
+		    });
+		    
 		    celda.addKeyListener(new KeyAdapter() {
 		        @Override
 		        public void keyTyped(KeyEvent e) {
@@ -96,6 +105,12 @@ public class VentanaPartida extends JFrame {
 		            }
 		        }
 		    });
+		    
+		    /*celda.addMouseListener(new MouseAdapter() {
+		    	public void mouseClicked(MouseEvent e) {
+		    		celda.setBackground(Color.blue);
+		    	}
+		    });*/
 		    
 		    int top = 1, left = 1, bottom = 1, right = 1; // por defecto todos los bordes a 1 de grosor
 
