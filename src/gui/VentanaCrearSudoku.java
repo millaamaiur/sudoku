@@ -3,11 +3,7 @@ package gui;
 import java.awt.BorderLayout;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.EventQueue;
 import java.awt.FlowLayout;
 import java.awt.Font;
@@ -18,14 +14,9 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
-
-import conexion.SQLConnect;
-import sudokuBDFunciones.FuncionesSudoku;
-
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
@@ -102,7 +93,6 @@ public class VentanaCrearSudoku extends JFrame {
 		btnGuardar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
-			
 		});
 		JButton btnVolver = new JButton("Volver");
 	
@@ -119,8 +109,6 @@ public class VentanaCrearSudoku extends JFrame {
 			}
 		});
 		
-		
-		
 	}
-	
 }
+
