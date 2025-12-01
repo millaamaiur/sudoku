@@ -126,7 +126,7 @@ public static Sudoku generarSudokuNuevo(String dificultad) {
 			
 			String sql = "SELECT CodSudoku, SudokuSinCompletar, SudokuCompletado, Dificultad\r\n"
 					+ "FROM SudokuNR\r\n"
-					+ "WHERE Dificultad LIKE " + dificultad+"\r\n"
+					+ "WHERE Dificultad LIKE " + "'" + dificultad+ "'" +"\r\n"
 					+ "ORDER BY RANDOM()\r\n"
 					+ "LIMIT 1 \r\n;";
 			
