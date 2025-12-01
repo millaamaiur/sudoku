@@ -5,6 +5,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import javax.swing.JOptionPane;
+
 import clases.Casilla;
 import clases.Sudoku;
 import conexion.SQLConnect;
@@ -114,4 +116,3 @@ public class FuncionesSudoku {
 		return rolBD;
 	}
 }
-	

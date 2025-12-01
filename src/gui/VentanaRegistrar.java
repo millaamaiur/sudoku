@@ -6,6 +6,7 @@ import java.awt.Image;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JTextField;
@@ -13,6 +14,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JPasswordField;
 
 public class VentanaRegistrar extends JFrame {
 
@@ -20,7 +22,7 @@ public class VentanaRegistrar extends JFrame {
 	private JPanel contentPane;
 	private VentanaLogin parent;
 	private JTextField txtUsuario;
-	private JTextField txtContrasenya;
+	private JPasswordField passwordField;
 
 
 	/**
@@ -60,11 +62,6 @@ public class VentanaRegistrar extends JFrame {
 		lblUsuario.setBounds(150, 120, 60, 13);
 		contentPane.add(lblUsuario);
 		
-		txtContrasenya = new JTextField();
-		txtContrasenya.setBounds(220, 157, 120, 25);
-		contentPane.add(txtContrasenya);
-		txtContrasenya.setColumns(10);
-		
 		JLabel lblContrasenya = new JLabel("Contraseña");
 		lblContrasenya.setBounds(150, 160, 70, 13);
 		contentPane.add(lblContrasenya);
@@ -82,10 +79,34 @@ public class VentanaRegistrar extends JFrame {
 		JButton btnRegistrarse = new JButton("Registrarse");
 		btnRegistrarse.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
+				String usuario = txtUsuario.getText();
+				
+				if (usuario.isEmpty() ) {
+					
+					JOptionPane.showMessageDialog(null, "Por favor rellena los datos", "Campos vacios", JOptionPane.WARNING_MESSAGE);
+					return;
+				}
+				
+				if (Character.isDigit(usuario.charAt(0))) {
+					JOptionPane.showMessageDialog(null, 
+			                "El nombre de usuario no puede empezar por un número.", 
+			                "Formato incorrecto", 
+			                JOptionPane.WARNING_MESSAGE);
+			            return;
+				}
 			}
 		});
 		btnRegistrarse.setBounds(244, 228, 85, 21);
 		contentPane.add(btnRegistrarse);
+		
+		JLabel lblInformacion = new JLabel("Introduce tus datos");
+		lblInformacion.setBounds(190, 90, 110, 13);
+		contentPane.add(lblInformacion);
+		
+		passwordField = new JPasswordField();
+		passwordField.setBounds(220, 157, 120, 25);
+		contentPane.add(passwordField);
 		
 		
 	}
