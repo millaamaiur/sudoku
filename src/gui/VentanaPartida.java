@@ -32,7 +32,8 @@ public class VentanaPartida extends JFrame {
 	private JButton btnIniciarTemp;
 	private JPanel panelSuperCentral;
 	private JPanel panelSuperior;
-
+	
+	
 	public VentanaPartida(VentanaLogin parent) {
 		this.parent = parent;
 		setTitle("Sudoku - Partida");
@@ -54,7 +55,7 @@ public class VentanaPartida extends JFrame {
 		//Panel de arriba (Dificultad y tiempo)
 		//Aqui se crea el panel y los labels de dificultad y tiempo
 		panelSuperior = new JPanel(new BorderLayout());
-		lblDificultad = new JLabel("Dificultad: Normal");
+		lblDificultad = new JLabel("Dificultad: " + sudoku.getDificultad());
 		lblDificultad.setFont(new Font("Segoe UI", Font.BOLD, 16));
 		lblTiempo = new JLabel("00:00"); 
 		lblTiempo.setFont(new Font("Segoe UI", Font.BOLD, 16));
@@ -170,6 +171,37 @@ public class VentanaPartida extends JFrame {
 			}
 		});
 		JButton btnReiniciar = new JButton("Reiniciar");
+		btnReiniciar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				   
+		        
+		        Casilla[][] casillas = sudoku.getTablero();
+		        Component[] celdas = panelTablero.getComponents();
+
+		        for (int fila = 0; fila < 9; fila++) {
+		            for (int col = 0; col < 9; col++) {
+
+		                JTextField tx = (JTextField) celdas[fila * 9 + col];
+		                Casilla casilla = casillas[fila][col];
+		                int valor = casilla.getValor();
+
+		                if (valor != 0) {
+		                    tx.setText(String.valueOf(valor));
+		                    tx.setEditable(false);
+		                    tx.setBackground(new Color(220, 220, 220)); 
+		                    tx.setFont(new Font("Segoe UI", Font.BOLD, 18));
+		                } else {
+		                    tx.setText("");
+		                    tx.setEditable(true);
+		                    tx.setBackground(Color.WHITE); 
+		                    tx.setFont(new Font("Segoe UI", Font.PLAIN, 18));
+		                }
+		            }
+		        }
+
+		        JOptionPane.showMessageDialog(null, "¡El tablero ha sido reiniciado!");
+			}
+		});
 		JButton btnResolver = new JButton("Resolver");
 		btnResolver.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
