@@ -5,6 +5,7 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
+
 import clases.Casilla;
 import clases.ControladorTimer;
 import clases.Sudoku;
@@ -145,7 +146,31 @@ public class VentanaPartida extends JFrame {
 		JButton btnComprobar = new JButton("Comprobar");
 		btnComprobar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+		        Casilla[][] solucion = sudoku.getSolucion(); 
+		        Component[] celdas = panelTablero.getComponents();
+		        int errores = 0;
+
+		        for (int fila = 0; fila < 9; fila++) {
+		            for (int col = 0; col < 9; col++) {
+		                JTextField tx = (JTextField) celdas[fila * 9 + col];
+		                String texto = tx.getText();
+		                if (!texto.isEmpty()) {
+		                    int valor = Integer.parseInt(texto);
+		                    if (valor != solucion[fila][col].getValor()) {
+		                        errores++;
+		                        tx.setBackground(Color.PINK); 
+		                    } else {
+		                        tx.setBackground(Color.WHITE); 
+		                    }
+		                }
+		            }
+		        }
+
+		        if (errores == 0) {
+		            JOptionPane.showMessageDialog(null, "Correcto");
+		        } else {
+		            JOptionPane.showMessageDialog(null, "Hay " + errores + " errores");
+		        }
 			}
 		});
 		JButton btnReiniciar = new JButton("Reiniciar");
@@ -177,7 +202,7 @@ public class VentanaPartida extends JFrame {
 		            }
 		        }
 
-		        JOptionPane.showMessageDialog(null, "¡El tablero ha sido reiniciado!");
+		        JOptionPane.showMessageDialog(null, "Se ha reiniciado el tablero");
 			}
 		});
 		JButton btnResolver = new JButton("Resolver");
