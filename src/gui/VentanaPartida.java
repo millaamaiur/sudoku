@@ -5,7 +5,6 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
-
 import clases.Casilla;
 import clases.ControladorTimer;
 import clases.Sudoku;

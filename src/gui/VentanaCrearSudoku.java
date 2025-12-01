@@ -101,7 +101,6 @@ public class VentanaCrearSudoku extends JFrame {
 		JButton btnGuardar= new JButton("Guardar");
 		btnGuardar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				guardarSudoku();
 			}
 			
 		});
@@ -123,63 +122,5 @@ public class VentanaCrearSudoku extends JFrame {
 		
 		
 	}
-	private void guardarSudoku() {
-	    int[][] tablero = new int[9][9];
-	    Component[] celdas = panelTablero.getComponents();
-	    
-	    for (int fila = 0; fila < 9; fila++) {
-	        for (int col = 0; col < 9; col++) {
-	            JTextField tf = (JTextField) celdas[fila * 9 + col];
-	            String texto = tf.getText();
-	            if (texto.isEmpty()) {
-	                tablero[fila][col] = 0;
-	            } else {
-	                try {
-	                    tablero[fila][col] = Integer.parseInt(texto);
-	                } catch (NumberFormatException ex) {
-	                    tablero[fila][col] = 0;
-	                }
-	            }
-	        }
-	    }
-	    
-	    if (!esSudokuValido(tablero)) {
-	        JOptionPane.showMessageDialog(this,
-	            "El sudoku no es válido.\n" +
-	            "Por favor, revisa que no haya números repetidos en filas, columnas o regiones.",
-	            "Error",
-	            JOptionPane.ERROR_MESSAGE);
-	        return;
-	    }
-	    
-	    try {
-	        // Usar FuncionesSudoku para guardar
-	        FuncionesSudoku.guardarSudoku(tablero, "Normal", "admin");
-	        JOptionPane.showMessageDialog(this,
-	            "✅ Sudoku guardado exitosamente",
-	            "Guardado",
-	            JOptionPane.INFORMATION_MESSAGE);
-	        dispose();
-	        parent.setVisible(true);
-	    } catch (Exception ex) {
-	        JOptionPane.showMessageDialog(this,
-	            "Error al guardar: " + ex.getMessage(),
-	            "Error",
-	            JOptionPane.ERROR_MESSAGE);
-	    }
-	}
-
-	private boolean esSudokuValido(int[][] tablero) {
-	    // Validación básica - implementar lógica real
-	    for (int i = 0; i < 9; i++) {
-	        for (int j = 0; j < 9; j++) {
-	            int valor = tablero[i][j];
-	            if (valor != 0 && (valor < 1 || valor > 9)) {
-	                return false;
-	            }
-	        }
-	    }
-	    return true;
-	}
-	    
+	
 }
