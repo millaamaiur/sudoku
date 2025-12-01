@@ -163,6 +163,17 @@ public class VentanaLogin extends JFrame {
 		btnSalir.setBounds(10, 332, 98, 21);
 		contentPane.add(btnSalir);
 		
+		JButton btnRegistrarse = new JButton("Registrarse");
+		btnRegistrarse.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				VentanaRegistrar registrar = new VentanaRegistrar(VentanaLogin.this);
+				registrar.setVisible(true);
+				VentanaLogin.this.setVisible(false);
+			}
+		});
+		btnRegistrarse.setBounds(170, 254, 132, 21);
+		contentPane.add(btnRegistrarse);
+		
 	}	
 	
 	private void confirmarSalida() { // para confirmar la salida
@@ -171,6 +182,4 @@ public class VentanaLogin extends JFrame {
 			System.exit(0);
 		}
 	}
-	
-
 }

@@ -55,7 +55,7 @@ public class VentanaPartida extends JFrame {
 		//Panel de arriba (Dificultad y tiempo)
 		//Aqui se crea el panel y los labels de dificultad y tiempo
 		panelSuperior = new JPanel(new BorderLayout());
-		lblDificultad = new JLabel("Dificultad: Normal");
+		lblDificultad = new JLabel("Dificultad: " + sudoku.getDificultad());
 		lblDificultad.setFont(new Font("Segoe UI", Font.BOLD, 16));
 		lblTiempo = new JLabel("00:00"); 
 		lblTiempo.setFont(new Font("Segoe UI", Font.BOLD, 16));
