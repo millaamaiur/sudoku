@@ -5,6 +5,9 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import sudokuBDFunciones.FuncionesSudoku;
+
 import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.FlowLayout;
@@ -186,6 +189,8 @@ public class VentanaAjustes extends JFrame {
 		        
 		        //esto es para aplicar lo configurado 
 		        parent.guardarAjustes(dificultad, volumen, colorFondo); //este metodo se crea en el VENTANA PARTIDA---falta hacer que se queden los ajustes
+		        
+		        parent.crearSudoku(FuncionesSudoku.generarSudokuNuevo(dificultad));
 		        
 		        String mensaje = "Configuaracion guardada: \n"+ "Dificultad :"+ dificultad + "\n"+ "Volumen: "+volumen+"\n"+ "Color : "+ colorFondo ;			            
 		        JOptionPane.showMessageDialog(null, mensaje,"Ajustes Guardados", JOptionPane.INFORMATION_MESSAGE);
