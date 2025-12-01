@@ -176,5 +176,31 @@ public static Sudoku generarSudokuNuevo(String dificultad) {
 		
 	}
 
+public static boolean existeUsuario(String usuario) {
+	boolean existe=false;
+	
+	try (Connection conn = SQLConnect.getConnection()) {
+		
+		Statement stmnt = conn.createStatement();
+		
+		String sql = "SELECT Count(*) Usuario FROM Usuarios WHERE NombreUsuario = ?";
+		
+		ResultSet rs = stmnt.executeQuery(sql);
+		
+		if (rs.next()) {
+            int NumUsuarios = rs.getInt(1);
+           
+            if (NumUsuarios > 0) {
+            	existe = true;
+            }
+		}
+		
+		} catch (SQLException e) {
+			System.err.println("Error al comprobar usuario: " + e.getMessage());
+	        return false;
+	}
+	return existe;
+}
+
 	
 }
