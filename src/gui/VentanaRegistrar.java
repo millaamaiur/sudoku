@@ -9,6 +9,9 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import sudokuBDFunciones.FuncionesSudoku;
+
 import javax.swing.JTextField;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -79,10 +82,11 @@ public class VentanaRegistrar extends JFrame {
 		JButton btnRegistrarse = new JButton("Registrarse");
 		btnRegistrarse.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+								
+				String usuario = txtUsuario.getText().trim(); 
+		        String password = String.valueOf(passwordField.getPassword());
 				
-				String usuario = txtUsuario.getText();
-				
-				if (usuario.isEmpty() ) {
+				if (usuario.isEmpty() || password.isEmpty()) {
 					
 					JOptionPane.showMessageDialog(null, "Por favor rellena los datos", "Campos vacios", JOptionPane.WARNING_MESSAGE);
 					return;
@@ -95,6 +99,40 @@ public class VentanaRegistrar extends JFrame {
 			                JOptionPane.WARNING_MESSAGE);
 			            return;
 				}
+				
+				if (password.length() < 8) {
+					JOptionPane.showMessageDialog(null, 
+			                "La contraseña debe tener al menos 8 caracteres.", 
+			                "Contraseña insegura", 
+			                JOptionPane.WARNING_MESSAGE);
+			            return;
+				}
+				
+				if (FuncionesSudoku.existeUsuario(usuario)) {
+		            JOptionPane.showMessageDialog(null, 
+		                "El usuario '" + usuario + "' ya esta en uso", 
+		                "Usuario Duplicado", 
+		                JOptionPane.ERROR_MESSAGE);
+		            return;
+		        }
+				
+				boolean registroExitoso = FuncionesSudoku.registrarUsuario(usuario, password);	
+				
+				
+				if (registroExitoso) {
+		            JOptionPane.showMessageDialog(null, 
+		                "¡Usuario registrado con éxito!", 
+		                "Bienvenido", 
+		                JOptionPane.INFORMATION_MESSAGE);
+		            
+		            txtUsuario.setText("");
+		            passwordField.setText("");
+		        } else {
+		            JOptionPane.showMessageDialog(null, 
+		                "Hubo un error técnico al registrarse.", 
+		                "Error BBDD", 
+		                JOptionPane.ERROR_MESSAGE);
+		        }
 			}
 		});
 		btnRegistrarse.setBounds(244, 228, 85, 21);
