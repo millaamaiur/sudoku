@@ -106,11 +106,7 @@ public class VentanaPartida extends JFrame {
 		        }
 		    });
 		    
-		    /*celda.addMouseListener(new MouseAdapter() {
-		    	public void mouseClicked(MouseEvent e) {
-		    		celda.setBackground(Color.blue);
-		    	}
-		    });*/
+		   
 		    
 		    int top = 1, left = 1, bottom = 1, right = 1; // por defecto todos los bordes a 1 de grosor
 
