@@ -60,7 +60,7 @@ public class VentanaPartida extends JFrame {
 		//Tema musica
 		try {
 		    AudioInputStream audio = AudioSystem.getAudioInputStream(
-		        getClass().getResource("/gui/soldado_y_profeta_remix_official_video.wav")
+		        getClass().getResource("/gui/cancion.wav")
 		    );
 		    musica = AudioSystem.getClip();
 		    musica.open(audio);
@@ -204,7 +204,7 @@ public class VentanaPartida extends JFrame {
 		        }
 
 		        if (errores == 0) {
-		            JOptionPane.showMessageDialog(null, "Correcto");
+		            JOptionPane.showMessageDialog(null, "Hay una solución posible");
 		        } else {
 		            JOptionPane.showMessageDialog(null, "Hay " + errores + " errores");
 		        }
