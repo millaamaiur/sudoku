@@ -5,6 +5,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import javax.swing.JOptionPane;
+
 import clases.Casilla;
 import clases.Sudoku;
 import conexion.SQLConnect;
@@ -127,6 +129,7 @@ public static Sudoku generarSudokuNuevo(String dificultad) {
 			String sql = "SELECT CodSudoku, SudokuSinCompletar, SudokuCompletado, Dificultad\r\n"
 					+ "FROM SudokuNR\r\n"
 					+ "WHERE Dificultad LIKE " + "'" + dificultad+ "'" +"\r\n"
+					+ "WHERE Dificultad LIKE " + "'" +dificultad+ "'" + "\r\n"
 					+ "ORDER BY RANDOM()\r\n"
 					+ "LIMIT 1 \r\n;";
 			
@@ -174,6 +177,31 @@ public static Sudoku generarSudokuNuevo(String dificultad) {
 		
 	}
 
+public static boolean existeUsuario(String usuario) {
+	boolean existe=false;
+	
+	try (Connection conn = SQLConnect.getConnection()) {
+		
+		Statement stmnt = conn.createStatement();
+		
+		String sql = "SELECT Count(*) Usuario FROM Usuarios WHERE NombreUsuario = ?";
+		
+		ResultSet rs = stmnt.executeQuery(sql);
+		
+		if (rs.next()) {
+            int NumUsuarios = rs.getInt(1);
+           
+            if (NumUsuarios > 0) {
+            	existe = true;
+            }
+		}
+		
+		} catch (SQLException e) {
+			System.err.println("Error al comprobar usuario: " + e.getMessage());
+	        return false;
+	}
+	return existe;
+}
+
 	
 }
-	
