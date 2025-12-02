@@ -3,6 +3,10 @@ package gui;
 import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
@@ -32,6 +36,7 @@ public class VentanaPartida extends JFrame {
 	private JButton btnIniciarTemp;
 	private JPanel panelSuperCentral;
 	private JPanel panelSuperior;
+	private Clip musica;
 	
 	
 	public VentanaPartida(VentanaLogin parent) {
@@ -51,6 +56,18 @@ public class VentanaPartida extends JFrame {
 		contentPane = new JPanel(new BorderLayout(10, 10));
 		contentPane.setBorder(new EmptyBorder(10, 10, 10, 10));
 		setContentPane(contentPane);
+		
+		//Tema musica
+		try {
+		    AudioInputStream audio = AudioSystem.getAudioInputStream(
+		        getClass().getResource("/gui/soldado_y_profeta_remix_official_video.wav")
+		    );
+		    musica = AudioSystem.getClip();
+		    musica.open(audio);
+		    musica.loop(Clip.LOOP_CONTINUOUSLY); // Reproduce en bucle
+		} catch (Exception e) {
+		    System.out.println("Error al cargar la música: " + e.getMessage());
+		}
 
 		//Panel de arriba (Dificultad y tiempo)
 		//Aqui se crea el panel y los labels de dificultad y tiempo
