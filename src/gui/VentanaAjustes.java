@@ -64,7 +64,7 @@ public class VentanaAjustes extends JFrame {
 		panelDif.add(lblDificultad, gbc_lblDificultad);
 		
 		JComboBox combDificultad = new JComboBox();
-		combDificultad.setModel(new DefaultComboBoxModel(new String[] {"Facil", "Medio", "Dificil"}));
+		combDificultad.setModel(new DefaultComboBoxModel(new String[] {"Facil", "Normal", "Dificil"}));
 		GridBagConstraints gbc_combDificultad = new GridBagConstraints();
 		gbc_combDificultad.insets = new Insets(0, 0, 0, 5);
 		gbc_combDificultad.fill = GridBagConstraints.HORIZONTAL;
