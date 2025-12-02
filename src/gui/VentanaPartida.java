@@ -60,7 +60,7 @@ public class VentanaPartida extends JFrame {
 		//Tema musica
 		try {
 		    AudioInputStream audio = AudioSystem.getAudioInputStream(
-		        getClass().getResource("/gui/soldado_y_profeta_remix_official_video.wav")
+		        getClass().getResource("/gui/esclava_remix.wav")
 		    );
 		    musica = AudioSystem.getClip();
 		    musica.open(audio);
