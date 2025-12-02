@@ -353,6 +353,7 @@ public class VentanaPartida extends JFrame {
 		            tf.setText(String.valueOf(valor));
 		            tf.setEditable(false);
 		            tf.setBackground(new Color(220, 220, 220));
+		            tf.setFocusable(false);
 		            tf.setFont(new Font("Segoe UI", Font.BOLD, 18));
 		        } else {
 		            tf.setText("");
