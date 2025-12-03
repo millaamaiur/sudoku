@@ -60,7 +60,7 @@ public class VentanaPartida extends JFrame {
 		//Tema musica
 		try {
 		    AudioInputStream audio = AudioSystem.getAudioInputStream(
-		        getClass().getResource("/gui/cancion.wav")
+		        getClass().getResource("/gui/soldado_y_profeta_remix_official_video.wav")
 		    );
 		    musica = AudioSystem.getClip();
 		    musica.open(audio);
@@ -246,6 +246,7 @@ public class VentanaPartida extends JFrame {
 		btnResolver.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Casilla[][] casillas = sudoku.getSolucion();
+				Casilla[][] inicial = sudoku.getTablero();
 				Component[] celdas = panelTablero.getComponents(); //esta linea lo que hace es coger cada uno de los textFields que hemos creado arriba y meterlo a un array
 
 				for (int fila = 0; fila < 9; fila++) {
@@ -253,6 +254,7 @@ public class VentanaPartida extends JFrame {
 				        
 				        JTextField tf = (JTextField) celdas[fila * 9 + col];
 				        Casilla casilla = casillas[fila][col];
+				        Casilla casillaInicial = inicial[fila][col];
 
 				        int valor = casilla.getValor();
 
@@ -264,6 +266,11 @@ public class VentanaPartida extends JFrame {
 				        } else {
 				            tf.setText("");
 				            tf.setEditable(true);
+				        }
+				        
+				        if (casillaInicial.getValor() == 0) {
+				        	tf.setBackground(Color.white);
+				        	tf.setFocusable(false);
 				        }
 				    }
 				}
@@ -429,8 +436,3 @@ public class VentanaPartida extends JFrame {
 	}
 	
 }
-/*
-
-
-
-*/
