@@ -9,6 +9,7 @@ import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
+
 import clases.Casilla;
 import clases.ControladorTimer;
 import clases.Sudoku;
@@ -35,6 +36,7 @@ public class VentanaPartida extends JFrame {
 	private JButton btnIniciarTemp;
 	private JPanel panelSuperCentral;
 	private JPanel panelSuperior;
+	private Clip musica;
 	
 	
 	public VentanaPartida(VentanaLogin parent) {
@@ -54,14 +56,13 @@ public class VentanaPartida extends JFrame {
 		contentPane = new JPanel(new BorderLayout(10, 10));
 		contentPane.setBorder(new EmptyBorder(10, 10, 10, 10));
 		setContentPane(contentPane);
-
 		
 		//Tema musica
 		try {
 		    AudioInputStream audio = AudioSystem.getAudioInputStream(
 		        getClass().getResource("/gui/soldado_y_profeta_remix_official_video.wav")
 		    );
-		    Clip musica = AudioSystem.getClip();
+		    musica = AudioSystem.getClip();
 		    musica.open(audio);
 		    musica.loop(Clip.LOOP_CONTINUOUSLY); // Reproduce en bucle
 		} catch (Exception e) {
@@ -123,7 +124,20 @@ public class VentanaPartida extends JFrame {
 		        }
 		    });
 		    
+		    celda.addFocusListener(new java.awt.event.FocusAdapter() {
+		        @Override
+		        public void focusGained(java.awt.event.FocusEvent e) {
+		            // Obtener el índice (posición) de la celda que ganó el foco
+		            Component source = (Component) e.getSource();
+		            // Esto asume que el orden de los componentes en panelTablero es fila*9 + col
+		            int index = panelTablero.getComponentZOrder(source); 
+		            
+		            int f = index / 9;
+		            int c = index % 9;
 
+		            // Llama a la función de resaltado con el color deseado
+		            resaltarCasillas(f, c, new Color(135, 206, 235), Color.WHITE);		        }
+		    });
 		    
 		    int top = 1, left = 1, bottom = 1, right = 1; // por defecto todos los bordes a 1 de grosor
 
@@ -158,7 +172,29 @@ public class VentanaPartida extends JFrame {
 		JButton btnComprobar = new JButton("Comprobar");
 		btnComprobar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+		        Casilla[][] solucion = sudoku.getSolucion(); 
+		        Component[] celdas = panelTablero.getComponents();
+		        int errores = 0;
+
+		        for (int fila = 0; fila < 9; fila++) {
+		            for (int col = 0; col < 9; col++) {
+		                JTextField tx = (JTextField) celdas[fila * 9 + col];
+		                String texto = tx.getText();
+		                if (!texto.isEmpty()) {
+		                    int valor = Integer.parseInt(texto);
+		                    if (valor != solucion[fila][col].getValor()) {
+		                        errores++;
+		                        tx.setBackground(Color.PINK); 
+		                    } 
+		                }
+		            }
+		        }
+
+		        if (errores == 0) {
+		            JOptionPane.showMessageDialog(null, "Hay una solución posible");
+		        } else {
+		            JOptionPane.showMessageDialog(null, "Hay " + errores + " errores");
+		        }
 			}
 		});
 		JButton btnReiniciar = new JButton("Reiniciar");
@@ -190,7 +226,7 @@ public class VentanaPartida extends JFrame {
 		            }
 		        }
 
-		        JOptionPane.showMessageDialog(null, "¡El tablero ha sido reiniciado!");
+		        JOptionPane.showMessageDialog(null, "Se ha reiniciado el tablero");
 			}
 		});
 		JButton btnResolver = new JButton("Resolver");
@@ -328,13 +364,62 @@ public class VentanaPartida extends JFrame {
 		            tf.setText(String.valueOf(valor));
 		            tf.setEditable(false);
 		            tf.setBackground(new Color(220, 220, 220));
+		            tf.setFocusable(false);
 		            tf.setFont(new Font("Segoe UI", Font.BOLD, 18));
 		        } else {
 		            tf.setText("");
+		            tf.setBackground(Color.WHITE);
 		            tf.setEditable(true);
 		        }
 		    }
 		}
+	}
+	
+	// Dentro de la clase VentanaPartida
+	public void resaltarCasillas(int filaSeleccionada, int colSeleccionada, Color colorResaltado, Color colorBase) {
+	    Component[] celdas = panelTablero.getComponents();
+
+	    // Calcular el inicio del cuadrante 3x3
+	    int inicioFilaCuadrante = (filaSeleccionada / 3) * 3;
+	    int inicioColCuadrante = (colSeleccionada / 3) * 3;
+
+	    for (int fila = 0; fila < 9; fila++) {
+	        for (int col = 0; col < 9; col++) {
+	            
+	            JTextField tx = (JTextField) celdas[fila * 9 + col];
+
+	            // Determinar si la casilla actual pertenece a la fila, columna o cuadrante
+	            boolean esFila = (fila == filaSeleccionada);
+	            boolean esColumna = (col == colSeleccionada);
+
+	            // Determinar si está dentro del cuadrante 3x3
+	            boolean esCuadrante = (fila >= inicioFilaCuadrante && fila < inicioFilaCuadrante + 3) &&
+	                                  (col >= inicioColCuadrante && col < inicioColCuadrante + 3);
+
+	            // Determinar si es la casilla seleccionada (para darle un color diferente)
+	            boolean esSeleccionada = (fila == filaSeleccionada && col == colSeleccionada);
+
+	            // 1. Si es la casilla seleccionada, darle un color diferente
+	            if (esSeleccionada) {
+	                tx.setBackground(colorResaltado.darker()); // Un color más oscuro para la celda activa
+	            } 
+	            // 2. Si es parte de la fila/columna/cuadrante, darle el color de resaltado
+	            else if (esFila || esColumna || esCuadrante) {
+	                tx.setBackground(colorResaltado); 
+	            } 
+	            // 3. En otro caso, limpiarla. Solo limpiamos las que no están editadas de inicio
+	            else {
+	                // Restaurar al color por defecto para las celdas vacías (editable)
+	                if (tx.isEditable()) {
+	                    tx.setBackground(Color.WHITE); 
+	                } 
+	                // Restaurar al color de las celdas iniciales (no editable)
+	                else {
+	                    tx.setBackground(new Color(220, 220, 220));
+	                }
+	            }
+	        }
+	    }
 	}
 	
 }
