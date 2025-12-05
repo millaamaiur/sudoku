@@ -23,7 +23,7 @@ import javax.swing.JButton;
 public class VentanaCrearSudoku extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-	private VentanaAdmin parent;
+	private VentanaLogin parent;
 	private JPanel panelTablero;
 	private JPanel panelControles;
 	private JLabel lblDificultad;
@@ -35,7 +35,7 @@ public class VentanaCrearSudoku extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public VentanaCrearSudoku(VentanaAdmin parent) {
+	public VentanaCrearSudoku(VentanaLogin parent) {
 		this.parent = parent;
 		setTitle("Sudoku - Crear Sudoku");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
