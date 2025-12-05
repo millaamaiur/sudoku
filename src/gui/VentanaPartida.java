@@ -137,20 +137,7 @@ public class VentanaPartida extends JFrame {
 
 		            // Llama a la función de resaltado con el color deseado
 		            resaltarCasillas(f, c, new Color(135, 206, 235), Color.WHITE);		        }
-		        
-		        @Override
-		        public void focusLost(java.awt.event.FocusEvent e) {
-		             // Opcional: Cuando la celda pierde el foco, podrías querer "des-resaltar" todas las celdas
-		             // Pero la función focusGained de la siguiente celda se encarga de esto.
-		             // Aquí se podría añadir lógica extra si se necesita, pero por ahora se puede dejar vacío.
-		        }
 		    });
-		    
-		    /*celda.addMouseListener(new MouseAdapter() {
-		    	public void mouseClicked(MouseEvent e) {
-		    		celda.setBackground(Color.blue);
-		    	}
-		    });*/
 		    
 		    int top = 1, left = 1, bottom = 1, right = 1; // por defecto todos los bordes a 1 de grosor
 
