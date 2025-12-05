@@ -283,9 +283,18 @@ public class VentanaPartida extends JFrame {
 		// ----- BOTON VOLVER -----
 		btnVolver.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				parent.setVisible(true);
-				dispose();
+				 if (musica != null) {
+			            musica.stop();
+			            musica.close();
+			        }//para volver a no tener nada modificado
+				 timer.stop();
+			     timer.reset();
+			     
+			     parent.setVisible(true);
+			     dispose();
+			
 			}
+			
 		});
 		// ----- BOTON AJUSTES -----
 		btnAjustes.addMouseListener(new MouseAdapter() {
