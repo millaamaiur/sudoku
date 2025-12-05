@@ -7,6 +7,7 @@ import java.awt.event.KeyEvent;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
+import javax.sound.sampled.FloatControl;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
@@ -308,12 +309,19 @@ public class VentanaPartida extends JFrame {
 			}
 		});
 		// ----- BOTON REINICIAR TEMP -----
+		
 		btnReiniciarTemp.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				timer.reset();
-			}
+		    public void actionPerformed(ActionEvent e) {
+		        timer.stop();    // parar si está en marcha
+		        timer.reset();   // reiniciar a 0
+		        
+		    }
 		});
+		
+		
+
 	}
+	
 
 	public void guardarAjustes(String dificultad, int volumen, Color colorFondo) {
 		// TODO Auto-generated method stub
@@ -421,5 +429,42 @@ public class VentanaPartida extends JFrame {
 	        }
 	    }
 	}
+	
+	public void setVolumen(float volumen) {
+	    try {
+	        if (musica != null) {
+	            FloatControl control = (FloatControl) musica.getControl(FloatControl.Type.MASTER_GAIN);
+
+	            float sliderValue = volumen / 100f;
+
+	            if (sliderValue == 0) {
+	                control.setValue(control.getMinimum()); // silencio total
+	            } else {
+	                float dB = (float) (Math.log10(sliderValue) * 20); // conversión logarítmica
+	                control.setValue(dB);
+	            }
+	        }
+	    } catch (Exception e) {
+	        System.out.println("Error al cambiar volumen: " + e.getMessage());
+	    }
+	}
+
+	
+	public int getVolumenActual() {
+	    try {
+	        FloatControl control = (FloatControl) musica.getControl(FloatControl.Type.MASTER_GAIN);
+	        float min = control.getMinimum();
+	        float max = control.getMaximum();
+	        float actual = control.getValue();
+	        return (int) (((actual - min) / (max - min)) * 100);
+	    } catch (Exception e) {
+	        return 50;
+	    }
+	}
+
+	public String getDificultadActual() {
+	    return lblDificultad.getText().replace("Dificultad: ", "");
+	}
+
 	
 }

@@ -95,7 +95,13 @@ public class VentanaAjustes extends JFrame {
 		gbc_slider.gridx = 3;
 		gbc_slider.gridy = 1;
 		panelSonido.add(slider, gbc_slider);
-		
+		slider.addChangeListener(e -> {
+		    int volumen = slider.getValue();
+		    if (parent != null) {
+		        parent.setVolumen(volumen);
+		    }
+		});
+
 		
 		
 		JPanel panelColor = new JPanel();
@@ -163,43 +169,44 @@ public class VentanaAjustes extends JFrame {
         panelAtras.setBackground(colorPadre);
 		
 		JButton btnVolver = new JButton("Volver");
-		btnVolver.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				parent.setVisible(true);
-				VentanaAjustes.this.setVisible(false);
-			}
-		});
 		GridBagConstraints gbc_btnVolver = new GridBagConstraints();
 		gbc_btnVolver.insets = new Insets(0, 0, 0, 5);
 		gbc_btnVolver.gridx = 0;
 		gbc_btnVolver.gridy = 1;
 		panelAtras.add(btnVolver, gbc_btnVolver);
+		btnVolver.addActionListener(new ActionListener() {
+		    public void actionPerformed(ActionEvent e) {
+
+		        parent.setVisible(true);
+		        VentanaAjustes.this.dispose(); // cerrar sin guardar
+		    }
+		});
+
 		
 		JButton btnGuardar = new JButton("Guardar");
-		btnGuardar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-		        String dificultad = (String) combDificultad.getSelectedItem();
-		        int volumen = slider.getValue();
-		        Color colorFondo = getContentPane().getBackground();
-		        
-		        //esto es para aplicar lo configurado 
-		        parent.guardarAjustes(dificultad, volumen, colorFondo); //este metodo se crea en el VENTANA PARTIDA---falta hacer que se queden los ajustes
-		        
-		        parent.crearSudoku(FuncionesSudoku.generarSudokuNuevo(dificultad));
-		        
-		        String mensaje = "Configuaracion guardada: \n"+ "Dificultad :"+ dificultad + "\n"+ "Volumen: "+volumen+"\n"+ "Color : "+ colorFondo ;			            
-		        JOptionPane.showMessageDialog(null, mensaje,"Ajustes Guardados", JOptionPane.INFORMATION_MESSAGE);
-		        
-		        parent.setVisible(true);
-		        VentanaAjustes.this.setVisible(false);
-			}
-		});
 		GridBagConstraints gbc_btnGuardar = new GridBagConstraints();
 		gbc_btnGuardar.insets = new Insets(0, 0, 0, 5);
 		gbc_btnGuardar.gridx = 3;
 		gbc_btnGuardar.gridy = 1;
 		panelAtras.add(btnGuardar, gbc_btnGuardar);
-		
+		btnGuardar.addActionListener(new ActionListener() {
+		    public void actionPerformed(ActionEvent e) {
+
+		        String dificultad = (String) combDificultad.getSelectedItem();
+		        int volumen = slider.getValue();
+		        Color colorFondo = getContentPane().getBackground();
+
+		        parent.guardarAjustes(dificultad, volumen, colorFondo);
+		        parent.setVolumen(volumen); // aplicar volumen real
+
+		        parent.setVisible(true);
+		        VentanaAjustes.this.dispose();  
+		    }
+		});
+
+		slider.setValue(parent.getVolumenActual()); //estos dos son para el volumen
+		combDificultad.setSelectedItem(parent.getDificultadActual());
+
 	}
 
 }
