@@ -4,6 +4,7 @@ import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
+import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.swing.*;
@@ -123,20 +124,6 @@ public class VentanaPartida extends JFrame {
 		    });
 		    
 
-		    celda.addFocusListener(new java.awt.event.FocusAdapter() {
-		        @Override
-		        public void focusGained(java.awt.event.FocusEvent e) {
-		            // Obtener el índice (posición) de la celda que ganó el foco
-		            Component source = (Component) e.getSource();
-		            // Esto asume que el orden de los componentes en panelTablero es fila*9 + col
-		            int index = panelTablero.getComponentZOrder(source); 
-		            
-		            int f = index / 9;
-		            int c = index % 9;
-
-		            // Llama a la función de resaltado con el color deseado
-		            resaltarCasillas(f, c, new Color(135, 206, 235), Color.WHITE);		        }
-		    });
 		    
 		    int top = 1, left = 1, bottom = 1, right = 1; // por defecto todos los bordes a 1 de grosor
 

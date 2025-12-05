@@ -229,4 +229,9 @@ public static boolean existeUsuario(String usuario) {
 	    
 	    return añadido;
 	}
+
+	public static boolean registrarUsuario(String usuario, String password) {
+		// TODO Auto-generated method stub
+		return false;
+	}
 }
