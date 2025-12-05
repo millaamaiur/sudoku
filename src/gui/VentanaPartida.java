@@ -3,6 +3,9 @@ package gui;
 import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import clases.Casilla;
@@ -50,6 +53,19 @@ public class VentanaPartida extends JFrame {
 		contentPane = new JPanel(new BorderLayout(10, 10));
 		contentPane.setBorder(new EmptyBorder(10, 10, 10, 10));
 		setContentPane(contentPane);
+
+		
+		//Tema musica
+		try {
+		    AudioInputStream audio = AudioSystem.getAudioInputStream(
+		        getClass().getResource("/gui/soldado_y_profeta_remix_official_video.wav")
+		    );
+		    Clip musica = AudioSystem.getClip();
+		    musica.open(audio);
+		    musica.loop(Clip.LOOP_CONTINUOUSLY); // Reproduce en bucle
+		} catch (Exception e) {
+		    System.out.println("Error al cargar la música: " + e.getMessage());
+		}
 
 		//Panel de arriba (Dificultad y tiempo)
 		//Aqui se crea el panel y los labels de dificultad y tiempo
@@ -106,7 +122,21 @@ public class VentanaPartida extends JFrame {
 		        }
 		    });
 		    
-		   
+
+		    celda.addFocusListener(new java.awt.event.FocusAdapter() {
+		        @Override
+		        public void focusGained(java.awt.event.FocusEvent e) {
+		            // Obtener el índice (posición) de la celda que ganó el foco
+		            Component source = (Component) e.getSource();
+		            // Esto asume que el orden de los componentes en panelTablero es fila*9 + col
+		            int index = panelTablero.getComponentZOrder(source); 
+		            
+		            int f = index / 9;
+		            int c = index % 9;
+
+		            // Llama a la función de resaltado con el color deseado
+		            resaltarCasillas(f, c, new Color(135, 206, 235), Color.WHITE);		        }
+		    });
 		    
 		    int top = 1, left = 1, bottom = 1, right = 1; // por defecto todos los bordes a 1 de grosor
 
@@ -180,6 +210,7 @@ public class VentanaPartida extends JFrame {
 		btnResolver.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Casilla[][] casillas = sudoku.getSolucion();
+				Casilla[][] inicial = sudoku.getTablero();
 				Component[] celdas = panelTablero.getComponents(); //esta linea lo que hace es coger cada uno de los textFields que hemos creado arriba y meterlo a un array
 
 				for (int fila = 0; fila < 9; fila++) {
@@ -187,6 +218,7 @@ public class VentanaPartida extends JFrame {
 				        
 				        JTextField tf = (JTextField) celdas[fila * 9 + col];
 				        Casilla casilla = casillas[fila][col];
+				        Casilla casillaInicial = inicial[fila][col];
 
 				        int valor = casilla.getValor();
 
@@ -198,6 +230,11 @@ public class VentanaPartida extends JFrame {
 				        } else {
 				            tf.setText("");
 				            tf.setEditable(true);
+				        }
+				        
+				        if (casillaInicial.getValor() == 0) {
+				        	tf.setBackground(Color.white);
+				        	tf.setFocusable(false);
 				        }
 				    }
 				}
@@ -314,8 +351,3 @@ public class VentanaPartida extends JFrame {
 	}
 	
 }
-/*
-
-
-
-*/

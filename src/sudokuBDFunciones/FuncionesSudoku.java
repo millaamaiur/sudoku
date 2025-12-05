@@ -203,5 +203,30 @@ public static boolean existeUsuario(String usuario) {
 	return existe;
 }
 
-	
+	public static boolean añadirSudoku(String sudokuInicial, String sudokuFinal, String dificultad) {
+		boolean añadido = false;
+		
+		try (Connection conn = SQLConnect.getConnection()) {
+	        
+	        String sql = "INSERT INTO SudokuNR (SudokuSinCompletar, SudokuCompletado, Dificultad) VALUES (?, ?, ?)";
+	        
+	        java.sql.PreparedStatement pst = conn.prepareStatement(sql);
+	        
+	        pst.setString(1, sudokuInicial);
+	        pst.setString(2, sudokuFinal);
+	        pst.setString(3, dificultad); 
+	        
+	        int filasAfectadas = pst.executeUpdate();
+	        
+	        if (filasAfectadas > 0) {
+	            añadido = true;
+	        }
+	        
+	    } catch (SQLException e) {
+	        System.err.println("Error al registrar usuario: " + e.getMessage());
+	        return false;
+	    }
+	    
+	    return añadido;
+	}
 }
