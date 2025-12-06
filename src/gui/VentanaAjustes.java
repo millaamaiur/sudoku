@@ -198,7 +198,9 @@ public class VentanaAjustes extends JFrame {
 
 		        parent.guardarAjustes(dificultad, volumen, colorFondo);
 		        parent.setVolumen(volumen); // aplicar volumen real
-
+		        parent.crearSudoku(FuncionesSudoku.generarSudokuNuevo(dificultad));
+		        
+		        
 		        parent.setVisible(true);
 		        VentanaAjustes.this.dispose();  
 		    }
