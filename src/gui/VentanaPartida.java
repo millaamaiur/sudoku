@@ -7,6 +7,7 @@ import java.awt.event.KeyEvent;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
+import javax.sound.sampled.FloatControl;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
@@ -137,20 +138,7 @@ public class VentanaPartida extends JFrame {
 
 		            // Llama a la función de resaltado con el color deseado
 		            resaltarCasillas(f, c, new Color(135, 206, 235), Color.WHITE);		        }
-		        
-		        @Override
-		        public void focusLost(java.awt.event.FocusEvent e) {
-		             // Opcional: Cuando la celda pierde el foco, podrías querer "des-resaltar" todas las celdas
-		             // Pero la función focusGained de la siguiente celda se encarga de esto.
-		             // Aquí se podría añadir lógica extra si se necesita, pero por ahora se puede dejar vacío.
-		        }
 		    });
-		    
-		    /*celda.addMouseListener(new MouseAdapter() {
-		    	public void mouseClicked(MouseEvent e) {
-		    		celda.setBackground(Color.blue);
-		    	}
-		    });*/
 		    
 		    int top = 1, left = 1, bottom = 1, right = 1; // por defecto todos los bordes a 1 de grosor
 
@@ -204,7 +192,7 @@ public class VentanaPartida extends JFrame {
 		        }
 
 		        if (errores == 0) {
-		            JOptionPane.showMessageDialog(null, "Correcto");
+		            JOptionPane.showMessageDialog(null, "Hay una solución posible");
 		        } else {
 		            JOptionPane.showMessageDialog(null, "Hay " + errores + " errores");
 		        }
@@ -246,6 +234,7 @@ public class VentanaPartida extends JFrame {
 		btnResolver.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Casilla[][] casillas = sudoku.getSolucion();
+				Casilla[][] inicial = sudoku.getTablero();
 				Component[] celdas = panelTablero.getComponents(); //esta linea lo que hace es coger cada uno de los textFields que hemos creado arriba y meterlo a un array
 
 				for (int fila = 0; fila < 9; fila++) {
@@ -253,6 +242,7 @@ public class VentanaPartida extends JFrame {
 				        
 				        JTextField tf = (JTextField) celdas[fila * 9 + col];
 				        Casilla casilla = casillas[fila][col];
+				        Casilla casillaInicial = inicial[fila][col];
 
 				        int valor = casilla.getValor();
 
@@ -264,6 +254,11 @@ public class VentanaPartida extends JFrame {
 				        } else {
 				            tf.setText("");
 				            tf.setEditable(true);
+				        }
+				        
+				        if (casillaInicial.getValor() == 0) {
+				        	tf.setBackground(Color.white);
+				        	tf.setFocusable(false);
 				        }
 				    }
 				}
@@ -288,9 +283,18 @@ public class VentanaPartida extends JFrame {
 		// ----- BOTON VOLVER -----
 		btnVolver.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				parent.setVisible(true);
-				dispose();
+				 if (musica != null) {
+			            musica.stop();
+			            musica.close();
+			        }//para volver a no tener nada modificado
+				 timer.stop();
+			     timer.reset();
+			     
+			     parent.setVisible(true);
+			     dispose();
+			
 			}
+			
 		});
 		// ----- BOTON AJUSTES -----
 		btnAjustes.addMouseListener(new MouseAdapter() {
@@ -314,12 +318,19 @@ public class VentanaPartida extends JFrame {
 			}
 		});
 		// ----- BOTON REINICIAR TEMP -----
+		
 		btnReiniciarTemp.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				timer.reset();
-			}
+		    public void actionPerformed(ActionEvent e) {
+		        timer.stop();    // parar si está en marcha
+		        timer.reset();   // reiniciar a 0
+		        
+		    }
 		});
+		
+		
+
 	}
+	
 
 	public void guardarAjustes(String dificultad, int volumen, Color colorFondo) {
 		// TODO Auto-generated method stub
@@ -428,9 +439,41 @@ public class VentanaPartida extends JFrame {
 	    }
 	}
 	
+	public void setVolumen(float volumen) {
+	    try {
+	        if (musica != null) {
+	            FloatControl control = (FloatControl) musica.getControl(FloatControl.Type.MASTER_GAIN);
+
+	            float sliderValue = volumen / 100f;
+
+	            if (sliderValue == 0) {
+	                control.setValue(control.getMinimum()); // silencio total
+	            } else {
+	                float dB = (float) (Math.log10(sliderValue) * 20); // conversión logarítmica
+	                control.setValue(dB);
+	            }
+	        }
+	    } catch (Exception e) {
+	        System.out.println("Error al cambiar volumen: " + e.getMessage());
+	    }
+	}
+
+	
+	public int getVolumenActual() {
+	    try {
+	        FloatControl control = (FloatControl) musica.getControl(FloatControl.Type.MASTER_GAIN);
+	        float min = control.getMinimum();
+	        float max = control.getMaximum();
+	        float actual = control.getValue();
+	        return (int) (((actual - min) / (max - min)) * 100);
+	    } catch (Exception e) {
+	        return 50;
+	    }
+	}
+
+	public String getDificultadActual() {
+	    return lblDificultad.getText().replace("Dificultad: ", "");
+	}
+
+	
 }
-/*
-
-
-
-*/

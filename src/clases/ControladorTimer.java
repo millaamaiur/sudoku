@@ -39,7 +39,16 @@ public class ControladorTimer implements Runnable{
 	}
 	
 	public void reset() {
-		reiniciar = true;
+		  // Reinicia los segundos a 0
+	    segundos = 0;
+	    // Actualiza el label inmediatamente
+	    SwingUtilities.invokeLater(() -> label.setText("00:00"));
+
+	    reiniciar = false;
+	    // Si el timer estaba corriendo, también puedes interrumpir el hilo
+	    if (corriendo && hilo != null) {
+	        hilo.interrupt();
+	    }
 	}
 	
 	@Override

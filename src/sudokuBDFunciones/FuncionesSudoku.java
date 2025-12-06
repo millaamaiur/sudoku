@@ -128,7 +128,7 @@ public static Sudoku generarSudokuNuevo(String dificultad) {
 			
 			String sql = "SELECT CodSudoku, SudokuSinCompletar, SudokuCompletado, Dificultad\r\n"
 					+ "FROM SudokuNR\r\n"
-					+ "WHERE Dificultad LIKE " + "'" +dificultad+ "'" + "\r\n"
+					+ "WHERE Dificultad LIKE " + "'" + dificultad+ "'" +"\r\n"
 					+ "ORDER BY RANDOM()\r\n"
 					+ "LIMIT 1 \r\n;";
 			
@@ -175,56 +175,50 @@ public static Sudoku generarSudokuNuevo(String dificultad) {
 		} 
 		
 	}
+
+public static boolean existeUsuario(String usuario) {
+	boolean existe=false;
 	
-	public static boolean existeUsuario(String usuario) {
-	    boolean existe = false;
-	    
-	    System.out.println(">>> DEBUG: Comprobando si existe el usuario: " + usuario);
-	
-	    try (Connection conn = SQLConnect.getConnection()) {
-	        
-	        String sql = "SELECT Count(*) FROM Usuarios WHERE NombreUsuario = ?";
-	        
-	        java.sql.PreparedStatement pst = conn.prepareStatement(sql);
-	        pst.setString(1, usuario);
-	        
-	        ResultSet rs = pst.executeQuery(); 
-	        
-	        if (rs.next()) {
-	            int numUsuarios = rs.getInt(1);
-	            
-	            System.out.println(">>> DEBUG: La BBDD ha encontrado " + numUsuarios + " coincidencias.");
-	
-	            if (numUsuarios > 0) {
-	                existe = true;
-	            }
-	        }
-	        
-	    } catch (SQLException e) {
-	        System.err.println(">>> DEBUG ERROR SQL: " + e.getMessage());
-	        e.printStackTrace();
+	try (Connection conn = SQLConnect.getConnection()) {
+		
+		Statement stmnt = conn.createStatement();
+		
+		String sql = "SELECT Count(*) Usuario FROM Usuarios WHERE NombreUsuario = ?";
+		
+		ResultSet rs = stmnt.executeQuery(sql);
+		
+		if (rs.next()) {
+            int NumUsuarios = rs.getInt(1);
+           
+            if (NumUsuarios > 0) {
+            	existe = true;
+            }
+		}
+		
+		} catch (SQLException e) {
+			System.err.println("Error al comprobar usuario: " + e.getMessage());
 	        return false;
-	    }
-	    
-	    return existe;
 	}
-	public static boolean registrarUsuario(String usuario, String password) {
-	    boolean registrado = false;
-	    
-	    try (Connection conn = SQLConnect.getConnection()) {
+	return existe;
+}
+
+	public static boolean añadirSudoku(String sudokuInicial, String sudokuFinal, String dificultad) {
+		boolean añadido = false;
+		
+		try (Connection conn = SQLConnect.getConnection()) {
 	        
-	        String sql = "INSERT INTO Usuarios (NombreUsuario, Password, Rol) VALUES (?, ?, ?)";
+	        String sql = "INSERT INTO SudokuNR (SudokuSinCompletar, SudokuCompletado, Dificultad) VALUES (?, ?, ?)";
 	        
 	        java.sql.PreparedStatement pst = conn.prepareStatement(sql);
 	        
-	        pst.setString(1, usuario);
-	        pst.setString(2, password);
-	        pst.setString(3, "JUGADOR"); 
+	        pst.setString(1, sudokuInicial);
+	        pst.setString(2, sudokuFinal);
+	        pst.setString(3, dificultad); 
 	        
 	        int filasAfectadas = pst.executeUpdate();
 	        
 	        if (filasAfectadas > 0) {
-	            registrado = true;
+	            añadido = true;
 	        }
 	        
 	    } catch (SQLException e) {
@@ -232,8 +226,11 @@ public static Sudoku generarSudokuNuevo(String dificultad) {
 	        return false;
 	    }
 	    
-	    return registrado;
+	    return añadido;
 	}
 
-	
+	public static boolean registrarUsuario(String usuario, String password) {
+		// TODO Auto-generated method stub
+		return false;
+	}
 }

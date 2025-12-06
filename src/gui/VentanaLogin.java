@@ -125,7 +125,7 @@ public class VentanaLogin extends JFrame {
 				String rol = FuncionesSudoku.comprobarCredenciales(usuarioInput, contrasenyaInput);
 				if (!rol.equals("ERROR")) {
 				    if (rol.equals("ADMIN")) {
-				        VentanaAdmin admin = new VentanaAdmin(VentanaLogin.this);//aqui depende de cual sea te abre una ventana o otra
+				        VentanaCrearSudoku admin = new VentanaCrearSudoku(VentanaLogin.this);
 				        txtUsuario.setText("");
 						passwordField.setText("");
 				        admin.setVisible(true);
