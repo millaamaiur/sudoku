@@ -33,9 +33,12 @@ public class VentanaAjustes extends JFrame {
 	private VentanaPartida parent;
 	private JPanel panelSonido;
 	private JPanel panelAtras;
+	private String dificultadOriginal;
 
 	public VentanaAjustes(VentanaPartida parent) {
 		this.parent = parent;
+		this.dificultadOriginal = parent.getDificultadActual();
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		JPanel contentPane = new JPanel();
@@ -64,6 +67,7 @@ public class VentanaAjustes extends JFrame {
 		panelDif.add(lblDificultad, gbc_lblDificultad);
 		
 		JComboBox combDificultad = new JComboBox();
+		combDificultad.setSelectedItem(dificultadOriginal);
 		combDificultad.setModel(new DefaultComboBoxModel(new String[] {"Facil", "Normal", "Dificil"}));
 		GridBagConstraints gbc_combDificultad = new GridBagConstraints();
 		gbc_combDificultad.insets = new Insets(0, 0, 0, 5);
@@ -198,7 +202,9 @@ public class VentanaAjustes extends JFrame {
 
 		        parent.guardarAjustes(dificultad, volumen, colorFondo);
 		        parent.setVolumen(volumen); // aplicar volumen real
-		        parent.crearSudoku(FuncionesSudoku.generarSudokuNuevo(dificultad));
+		        if (!dificultad.equals(dificultadOriginal)) {
+		            parent.crearSudoku(FuncionesSudoku.generarSudokuNuevo(dificultad));
+		        }
 		        
 		        
 		        parent.setVisible(true);

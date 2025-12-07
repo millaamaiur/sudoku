@@ -475,5 +475,7 @@ public class VentanaPartida extends JFrame {
 	    return lblDificultad.getText().replace("Dificultad: ", "");
 	}
 
-	
+	public String getDificultad() {
+		return lblDificultad.getText();
+	}
 }
