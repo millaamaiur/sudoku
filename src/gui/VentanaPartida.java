@@ -1,4 +1,3 @@
-
 package gui;
 
 import java.awt.*;
@@ -177,72 +176,28 @@ public class VentanaPartida extends JFrame {
 		        Casilla[][] solucion = sudoku.getSolucion(); 
 		        Component[] celdas = panelTablero.getComponents();
 		        int errores = 0;
-		        int vacias = 0;
-		        
-		        //poner colores de vuelta
-		        for (Component c : celdas) {
-		            JTextField hueco = (JTextField) c;
-		            if (hueco.isEditable()) {
-		            	hueco.setBackground(Color.WHITE);
-		            }
-		        }
-		        
+
 		        for (int fila = 0; fila < 9; fila++) {
 		            for (int col = 0; col < 9; col++) {
 		                JTextField tx = (JTextField) celdas[fila * 9 + col];
 		                String texto = tx.getText();
-		                
-		                if (texto.isEmpty()) {
-		                    vacias++;
-		                } else {
-		                    try {
-		                        int valor = Integer.parseInt(texto);
-		                        if (valor != solucion[fila][col].getValor()) {
-		                            errores++;
-		                            tx.setBackground(Color.PINK); 
-		                        } else {
-		                            //celda correcta - color verde claro
-		                            tx.setBackground(new Color(200, 255, 200));
-		                        }
-		                    } catch (NumberFormatException ee) {
-		                    }
+		                if (!texto.isEmpty()) {
+		                    int valor = Integer.parseInt(texto);
+		                    if (valor != solucion[fila][col].getValor()) {
+		                        errores++;
+		                        tx.setBackground(Color.PINK); 
+		                    } 
 		                }
 		            }
 		        }
 
-
-		        if (vacias > 0 && errores == 0) {
-		        	
-		        	String mensaje1 = vacias + " celdas vacias\n" + "Ningun error detectado\n" + "Continua completando el sudoku";
-		            JOptionPane.showMessageDialog(null, mensaje1, "Bien hasta ahora", JOptionPane.INFORMATION_MESSAGE);
-		            
-		        } else if (errores > 0) {
-		        	
-		        	String mensaje2 = errores + " errores\n" + (81 - vacias - errores) + " celdas correctas\n" + "Las celdas incorrectas estan en rosa";
-		            JOptionPane.showMessageDialog(null, mensaje2, "Corrige los errores",JOptionPane.WARNING_MESSAGE);
-		            
-		        } else { //cuando gana de verdad
-		        	timer.stop(); //para el contador porque ya ha ganado
-		        	String menaje3 = "Felicidades\n" + "Sudoku completado perfectamente\n" + "Tiempo: " + lblTiempo.getText();
-		        	
-		        	try {// Intentar cargar imagen de victoria
-		        		
-		        		ImageIcon iconoVictoria = new ImageIcon(getClass().getResource("/gui/victoria.png")); //--------AQUI PON LA IMAGEN DE VICTORIA------
-		                Image img = iconoVictoria.getImage().getScaledInstance(80, 80, Image.SCALE_SMOOTH);
-		                iconoVictoria = new ImageIcon(img);
-		                
-		                JOptionPane.showMessageDialog(null,menaje3, "Victoria", JOptionPane.INFORMATION_MESSAGE, iconoVictoria);
-		                
-		            } catch (Exception e20) {
-		                //por si no va o no hay imagen
-		                JOptionPane.showMessageDialog(null, menaje3, "Victoria sin icono", JOptionPane.INFORMATION_MESSAGE);
-		                
-		            }
-		        	
+		        if (errores == 0) {
+		            JOptionPane.showMessageDialog(null, "Hay una solución posible");
+		        } else {
+		            JOptionPane.showMessageDialog(null, "Hay " + errores + " errores");
 		        }
 			}
 		});
-		
 		JButton btnReiniciar = new JButton("Reiniciar");
 		btnReiniciar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
