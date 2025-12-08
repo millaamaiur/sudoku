@@ -227,7 +227,7 @@ public class VentanaPartida extends JFrame {
 		        	
 		        	try {// Intentar cargar imagen de victoria
 		        		
-		        		ImageIcon iconoVictoria = new ImageIcon(getClass().getResource("/gui/victoria.png"));
+		        		ImageIcon iconoVictoria = new ImageIcon(getClass().getResource("/gui/victoria.png")); //--------AQUI PON LA IMAGEN DE VICTORIA------
 		                Image img = iconoVictoria.getImage().getScaledInstance(80, 80, Image.SCALE_SMOOTH);
 		                iconoVictoria = new ImageIcon(img);
 		                
