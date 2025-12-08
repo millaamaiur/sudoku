@@ -48,8 +48,6 @@ public class VentanaPartida extends JFrame {
 		setLocationRelativeTo(null);
 		setResizable(false);
 		
-		ControladorTimer timer = new ControladorTimer(0, false, lblTiempo);//lo pongo aqui arriba para que funione en todos los botones
-		
 		Sudoku sudoku = FuncionesSudoku.generarSudokuInicial();
 		
 		ImageIcon icon = new ImageIcon(getClass().getResource("/gui/logo.png"));
@@ -86,6 +84,7 @@ public class VentanaPartida extends JFrame {
 		panelSuperior.add(lblTiempo, BorderLayout.EAST);
 		panelSuperior.add(panelSuperCentral, BorderLayout.CENTER);
 		
+		ControladorTimer timer = new ControladorTimer(0, false, lblTiempo);//lo pongo aqui arriba para que funione en todos los botones
 		btnIniciarTemp = new JButton("Iniciar");
 		panelSuperCentral.add(btnIniciarTemp);
 		
@@ -228,7 +227,7 @@ public class VentanaPartida extends JFrame {
 		        	
 		        	try {// Intentar cargar imagen de victoria
 		        		
-		        		ImageIcon iconoVictoria = new ImageIcon(getClass().getResource("/gui/victoria.png")); //--AQUI HACE FALTA PONER EL LOGO, NO LO PONGO PORQ ANTES SE ME HA LIADO MUCHISIMO
+		        		ImageIcon iconoVictoria = new ImageIcon(getClass().getResource("victory.png")); //--AQUI HACE FALTA PONER EL LOGO, NO LO PONGO PORQ ANTES SE ME HA LIADO MUCHISIMO
 		                Image img = iconoVictoria.getImage().getScaledInstance(80, 80, Image.SCALE_SMOOTH);
 		                iconoVictoria = new ImageIcon(img);
 		                
