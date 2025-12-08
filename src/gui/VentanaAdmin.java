@@ -100,7 +100,9 @@ public class VentanaAdmin extends JFrame {
 	
 	
 	private void abrirCrearSudoku() {
-		//necesitemao crear la ventanacrearsudoku para esto
+	    VentanaCrearSudoku crearSudoku = new VentanaCrearSudoku(parent);
+	    crearSudoku.setVisible(true);
+	    dispose();
 	}
 	
 	private void salir() {

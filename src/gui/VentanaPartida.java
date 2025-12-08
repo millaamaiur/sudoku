@@ -38,7 +38,7 @@ public class VentanaPartida extends JFrame {
 	private JPanel panelSuperCentral;
 	private JPanel panelSuperior;
 	private Clip musica;
-	
+	private ControladorTimer timer;
 	
 	public VentanaPartida(VentanaLogin parent) {
 		this.parent = parent;
@@ -84,7 +84,9 @@ public class VentanaPartida extends JFrame {
 		panelSuperior.add(lblTiempo, BorderLayout.EAST);
 		panelSuperior.add(panelSuperCentral, BorderLayout.CENTER);
 		
-		ControladorTimer timer = new ControladorTimer(0, false, lblTiempo);//lo pongo aqui arriba para que funione en todos los botones
+		timer = new ControladorTimer(0, false, lblTiempo);//lo pongo aqui arriba para que funione en todos los botones
+		timer.start(); // para que empieze automaticamente al iniciar sesion 
+		
 		btnIniciarTemp = new JButton("Iniciar");
 		panelSuperCentral.add(btnIniciarTemp);
 		
@@ -115,16 +117,37 @@ public class VentanaPartida extends JFrame {
 		    });
 		    
 		    celda.addKeyListener(new KeyAdapter() {
-		        @Override
-		        public void keyTyped(KeyEvent e) {
-		            char c = e.getKeyChar();
-		            JTextField source = (JTextField) e.getSource();
-		            // Solo permitir numeros del 1 al 9
-		            if (!(c >= '1' && c <= '9') || source.getText().length() >= 1) {
-		                e.consume(); // Si no es un numero o ya hay un numero en la casilla el consume lo que hace es no escribir en la casilla
-		            }
-		        }
-		    });
+		    	 @Override
+		    	    public void keyTyped(KeyEvent e) {
+		    	        char c = e.getKeyChar();
+		    	        JTextField source = (JTextField) e.getSource();
+		    	        
+		    	        // Solo permitir números del 1 al 9
+		    	        if (c >= '1' && c <= '9') {
+		    	            // Si ya hay un número, seleccionarlo para que se reemplace
+		    	            if (!source.getText().isEmpty()) {
+		    	                source.selectAll(); // Selecciona todo el texto
+		    	            }
+		    	            // Permitir la tecla (no hacer consume)
+		    	        } else if (c == KeyEvent.VK_BACK_SPACE || c == KeyEvent.VK_DELETE) {
+		    	            // Permitir borrar
+		    	            source.setText("");
+		    	            e.consume(); // Consumir para evitar duplicados
+		    	        } else {
+		    	            // Cualquier otro carácter, no permitirlo
+		    	            e.consume();
+		    	        }
+		    	    }
+		    	    
+		    	    @Override
+		    	    public void keyPressed(KeyEvent e) {
+		    	        JTextField source = (JTextField) e.getSource();
+		    	        // Si se presiona cualquier tecla numérica y ya hay texto, seleccionarlo
+		    	        if (e.getKeyChar() >= '1' && e.getKeyChar() <= '9' && !source.getText().isEmpty()) {
+		    	            source.selectAll();
+		    	        }
+		    	    }
+		    	});
 		    
 		    celda.addFocusListener(new java.awt.event.FocusAdapter() {
 		        @Override
@@ -226,13 +249,13 @@ public class VentanaPartida extends JFrame {
 		        	String menaje3 = "Felicidades\n" + "Sudoku completado perfectamente\n" + "Tiempo: " + lblTiempo.getText();
 		        	
 		        	try {// Intentar cargar imagen de victoria
-		        		
-		        		ImageIcon iconoVictoria = new ImageIcon(getClass().getResource("victory.png")); //--AQUI HACE FALTA PONER EL LOGO, NO LO PONGO PORQ ANTES SE ME HA LIADO MUCHISIMO
+
+		        		ImageIcon iconoVictoria = new ImageIcon(getClass().getResource("/gui/victory.png")); 
 		                Image img = iconoVictoria.getImage().getScaledInstance(80, 80, Image.SCALE_SMOOTH);
 		                iconoVictoria = new ImageIcon(img);
 		                
 		                JOptionPane.showMessageDialog(null,menaje3, "Victoria", JOptionPane.INFORMATION_MESSAGE, iconoVictoria);
-		                
+		          
 		            } catch (Exception e20) {
 		                //por si no va o no hay imagen
 		                JOptionPane.showMessageDialog(null, menaje3, "Victoria sin icono", JOptionPane.INFORMATION_MESSAGE);
@@ -320,8 +343,6 @@ public class VentanaPartida extends JFrame {
 		panelControles.add(btnVolver);
 		contentPane.add(panelControles, BorderLayout.SOUTH);
 
-		
-		
 
 		//ACCIONES DE CADA BOTÓN
 		// ----- BOTON VOLVER -----
@@ -332,7 +353,6 @@ public class VentanaPartida extends JFrame {
 			            musica.close();
 			        }//para volver a no tener nada modificado
 				 timer.stop();
-			     timer.reset();
 			     
 			     parent.setVisible(true);
 			     dispose();
@@ -342,13 +362,21 @@ public class VentanaPartida extends JFrame {
 		});
 		// ----- BOTON AJUSTES -----
 		btnAjustes.addMouseListener(new MouseAdapter() {
+			
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				 //pausar el timer antes de abrir ajustes
+		        if (timer != null) {
+		            timer.pause();
+		        }
 				VentanaAjustes ventana = new VentanaAjustes(VentanaPartida.this);
 				ventana.setVisible(true);
 				VentanaPartida.this.setVisible(false);
 			}
 		});
+		
+		
+		
 		// ----- BOTON INICIAR TEMP -----
 		btnIniciarTemp.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -367,7 +395,7 @@ public class VentanaPartida extends JFrame {
 		    public void actionPerformed(ActionEvent e) {
 		        timer.stop();    // parar si está en marcha
 		        timer.reset();   // reiniciar a 0
-		        
+		        timer.start();
 		    }
 		});
 		
@@ -522,4 +550,22 @@ public class VentanaPartida extends JFrame {
 	public String getDificultad() {
 		return lblDificultad.getText();
 	}
+	
+
+	//metodos para el timer
+		public void pausarTimer() {
+		    if (timer != null) {
+		        timer.pause();
+		    }
+		}
+
+		public void reanudarTimer() {
+		    if (timer != null) {
+		        timer.resume();
+		    }
+		}
+
+		public ControladorTimer getTimer() {
+		    return timer;
+		}
 }

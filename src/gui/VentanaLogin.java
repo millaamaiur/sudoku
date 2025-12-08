@@ -124,10 +124,10 @@ public class VentanaLogin extends JFrame {
 				
 				String rol = FuncionesSudoku.comprobarCredenciales(usuarioInput, contrasenyaInput);
 				if (!rol.equals("ERROR")) {
-				    if (rol.equals("ADMIN")) {
-				        VentanaCrearSudoku admin = new VentanaCrearSudoku(VentanaLogin.this);
+				 if (rol.equals("ADMIN")) {
+				        VentanaAdmin admin = new VentanaAdmin(VentanaLogin.this);
 				        txtUsuario.setText("");
-						passwordField.setText("");
+				        passwordField.setText("");
 				        admin.setVisible(true);
 				    } else {
 				        VentanaPartida ventana = new VentanaPartida(VentanaLogin.this);
@@ -180,4 +180,6 @@ public class VentanaLogin extends JFrame {
 			System.exit(0);
 		}
 	}
+
+	
 }

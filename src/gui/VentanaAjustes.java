@@ -6,6 +6,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import clases.ControladorTimer;
 import sudokuBDFunciones.FuncionesSudoku;
 
 import java.awt.GridLayout;
@@ -34,6 +35,7 @@ public class VentanaAjustes extends JFrame {
 	private JPanel panelSonido;
 	private JPanel panelAtras;
 	private String dificultadOriginal;
+	private ControladorTimer timer;
 
 	public VentanaAjustes(VentanaPartida parent) {
 		this.parent = parent;
@@ -180,7 +182,10 @@ public class VentanaAjustes extends JFrame {
 		panelAtras.add(btnVolver, gbc_btnVolver);
 		btnVolver.addActionListener(new ActionListener() {
 		    public void actionPerformed(ActionEvent e) {
-
+		    	 // REANUDAR el timer al volver
+		        if (parent != null) {
+		            parent.reanudarTimer();
+		        }
 		        parent.setVisible(true);
 		        VentanaAjustes.this.dispose(); // cerrar sin guardar
 		    }
@@ -206,6 +211,10 @@ public class VentanaAjustes extends JFrame {
 		            parent.crearSudoku(FuncionesSudoku.generarSudokuNuevo(dificultad));
 		        }
 		        
+		        // REANUDAR el timer al volver
+		        if (parent != null) {
+		            parent.reanudarTimer();
+		        }		        
 		        
 		        parent.setVisible(true);
 		        VentanaAjustes.this.dispose();  
@@ -215,6 +224,23 @@ public class VentanaAjustes extends JFrame {
 		slider.setValue(parent.getVolumenActual()); //estos dos son para el volumen
 		combDificultad.setSelectedItem(parent.getDificultadActual());
 
+	}
+	
+	//metodos para el timer
+	public void pausarTimer() {
+	    if (timer != null) {
+	        timer.pause();
+	    }
+	}
+
+	public void reanudarTimer() {
+	    if (timer != null) {
+	        timer.resume();
+	    }
+	}
+
+	public ControladorTimer getTimer() {
+	    return timer;
 	}
 
 }
