@@ -285,6 +285,7 @@ public class VentanaPartida extends JFrame {
 		                    tx.setEditable(false);
 		                    tx.setBackground(new Color(220, 220, 220)); 
 		                    tx.setFont(new Font("Segoe UI", Font.BOLD, 18));
+		                    tx.setFocusable(false);
 		                } else {
 		                    tx.setText("");
 		                    tx.setEditable(true);
@@ -325,7 +326,7 @@ public class VentanaPartida extends JFrame {
 				        
 				        if (casillaInicial.getValor() == 0) {
 				        	tf.setBackground(Color.white);
-				        	tf.setFocusable(false);
+				        	tf.setEditable(false);
 				        }
 				    }
 				}
@@ -459,6 +460,7 @@ public class VentanaPartida extends JFrame {
 		            tf.setText("");
 		            tf.setBackground(Color.WHITE);
 		            tf.setEditable(true);
+		            tf.setFocusable(true);
 		        }
 		    }
 		}
