@@ -180,6 +180,4 @@ public class VentanaLogin extends JFrame {
 			System.exit(0);
 		}
 	}
-
-	
 }
