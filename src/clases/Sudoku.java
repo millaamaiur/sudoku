@@ -2,8 +2,7 @@ package clases;
 
 public class Sudoku {
 	
-	/*Los sudokus creo que lo mejor sería hacerlo con arrays porque es lo mas sencillo.
-	 * Lo de solucion es directamente el sudoku resuelto*/ 
+	/*Los sudokus contienen arrays de casillas (tablero y solucion) que en la bd manejamos como un string de 81 caracteres*/ 
 	
 	private Casilla[][] tablero;
 	private Casilla[][] solucion;
@@ -50,16 +49,4 @@ public class Sudoku {
 	public void setId(int id) {
 		this.id = id;
 	}	
-	
-	public void resolverSudoku() {
-		
-	}
-	
-	public void confirmarColumna() {
-		
-	}
-	
-	public void confirmarFila() {
-		
-	}
 }

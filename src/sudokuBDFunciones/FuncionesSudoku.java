@@ -230,7 +230,28 @@ public static boolean existeUsuario(String usuario) {
 	}
 
 	public static boolean registrarUsuario(String usuario, String password) {
-		// TODO Auto-generated method stub
-		return false;
+		boolean registrado = false;
+		    try (Connection conn = SQLConnect.getConnection()) {
+		        
+		        String sql = "INSERT INTO Usuarios (NombreUsuario, Password, Rol) VALUES (?, ?, ?)";
+		        
+		        java.sql.PreparedStatement pst = conn.prepareStatement(sql);
+		        
+		        pst.setString(1, usuario);
+		        pst.setString(2, password);
+		        pst.setString(3, "JUGADOR"); 
+		        
+		        int filasAfectadas = pst.executeUpdate();
+		        
+		        if (filasAfectadas > 0) {
+		            registrado = true;
+		        }
+		        
+		    } catch (SQLException e) {
+		        System.err.println("Error al registrar usuario: " + e.getMessage());
+		        return false;
+		    }
+		    
+		    return registrado;
 	}
 }
