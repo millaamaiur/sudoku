@@ -84,9 +84,10 @@ public class VentanaPartida extends JFrame {
 		panelSuperior.add(lblTiempo, BorderLayout.EAST);
 		panelSuperior.add(panelSuperCentral, BorderLayout.CENTER);
 		
-		timer = new ControladorTimer(0, false, lblTiempo);//lo pongo aqui arriba para que funione en todos los botones
-		timer.start(); // para que empieze automaticamente al iniciar sesion 
+		timer = new ControladorTimer(0, false, lblTiempo);
+		timer.start(); // para que el timer empiece automaticamente al iniciar sesion 
 		
+		//Botones del timer
 		btnIniciarTemp = new JButton("Iniciar");
 		panelSuperCentral.add(btnIniciarTemp);
 		
@@ -101,7 +102,7 @@ public class VentanaPartida extends JFrame {
 		panelTablero = new JPanel(new GridLayout(9, 9, 2, 2));
 		panelTablero.setBackground(new Color(192, 192, 192));
 
-		//Con este bucle for generamos las casillas. SOLO NÚMEROS 1-9
+		//Con este bucle for generamos las casillas. SOLO PERMITE NÚMEROS 1-9
 		for (int i = 0; i < 81; i++) {
 		    JTextField celda = new JTextField();
 		    celda.setHorizontalAlignment(JTextField.CENTER);
@@ -112,7 +113,7 @@ public class VentanaPartida extends JFrame {
 
 				@Override
 		        public void setVisible(boolean v) {
-		            super.setVisible(false); // Siempre lo mantiene invisible
+		            super.setVisible(false); // Siempre mantiene el cursor de escritura invisible
 		        }
 		    });
 		    
@@ -178,16 +179,12 @@ public class VentanaPartida extends JFrame {
 		    if (i % 9 == 6) left = 5;
 		    if (i % 9 == 8) right = 5;
 
+		    // Le pone grosor a la celda
 		    celda.setBorder(BorderFactory.createMatteBorder(top, left, bottom, right, Color.BLACK));
 		    panelTablero.add(celda);
 		}
 		
 		contentPane.add(panelTablero, BorderLayout.CENTER);
-
-		//---------------------------------------------------------------
-		// Cargar el sudoku de prueba EN LAS CELDAS YA CREADAS
-		
-		//---------------------------------------------------------------
 		crearSudoku(sudoku);
 		
 		//Panel de abajo (Botones)
@@ -233,7 +230,8 @@ public class VentanaPartida extends JFrame {
 		            }
 		        }
 
-
+		        
+		        //Mensajes que se muestran por pantalla dependiendo del resultado de la comprobación
 		        if (vacias > 0 && errores == 0) {
 		        	
 		        	String mensaje1 = vacias + " celdas vacias\n" + "Ningun error detectado\n" + "Continua completando el sudoku";
@@ -555,19 +553,19 @@ public class VentanaPartida extends JFrame {
 	
 
 	//metodos para el timer
-		public void pausarTimer() {
-		    if (timer != null) {
-		        timer.pause();
-		    }
-		}
+	public void pausarTimer() {
+	    if (timer != null) {
+	        timer.pause();
+	    }
+	}
 
-		public void reanudarTimer() {
-		    if (timer != null) {
-		        timer.resume();
-		    }
-		}
+	public void reanudarTimer() {
+	    if (timer != null) {
+	        timer.resume();
+	    }
+	}
 
-		public ControladorTimer getTimer() {
-		    return timer;
-		}
+	public ControladorTimer getTimer() {
+	    return timer;
+	}
 }

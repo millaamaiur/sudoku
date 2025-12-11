@@ -61,14 +61,17 @@ public class VentanaRegistrar extends JFrame {
 		contentPane.add(txtUsuario);
 		txtUsuario.setColumns(10);
 		
+		//Label Usuario
 		JLabel lblUsuario = new JLabel("Usuario");
 		lblUsuario.setBounds(150, 120, 60, 13);
 		contentPane.add(lblUsuario);
 		
+		//Label contraseña
 		JLabel lblContrasenya = new JLabel("Contraseña");
 		lblContrasenya.setBounds(150, 160, 70, 13);
 		contentPane.add(lblContrasenya);
 		
+		//Boton para volver a ventana login
 		JButton btnVolver = new JButton("Volver");
 		btnVolver.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -79,6 +82,7 @@ public class VentanaRegistrar extends JFrame {
 		btnVolver.setBounds(125, 228, 85, 21);
 		contentPane.add(btnVolver);
 		
+		//Boton para registrase
 		JButton btnRegistrarse = new JButton("Registrarse");
 		btnRegistrarse.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -86,6 +90,8 @@ public class VentanaRegistrar extends JFrame {
 				String usuario = txtUsuario.getText().trim(); 
 		        String password = String.valueOf(passwordField.getPassword());
 				
+		        
+		        //CONDICIONES PARA QUE LA CONTRASEÑA Y EL USUARIO SEAN VALIDOS
 				if (usuario.isEmpty() || password.isEmpty()) {
 					
 					JOptionPane.showMessageDialog(null, "Por favor rellena los datos", "Campos vacios", JOptionPane.WARNING_MESSAGE);
@@ -116,6 +122,8 @@ public class VentanaRegistrar extends JFrame {
 		            return;
 		        }
 				
+				//Funcion para registrar el usuario en la BD que devuelve un booleano 
+				//para confirmar si el registro se ha efectuado correctamente
 				boolean registroExitoso = FuncionesSudoku.registrarUsuario(usuario, password);	
 				
 				
