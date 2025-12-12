@@ -263,11 +263,13 @@ public class VentanaPartida extends JFrame {
 		        }
 			}
 		});
+		
+		//Boton para reiniciar el tablero
 		JButton btnReiniciar = new JButton("Reiniciar");
 		btnReiniciar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				   
-		        
+		        //Guarda las casillas del sudoku y las celdas en estas variables
 		        Casilla[][] casillas = sudoku.getTablero();
 		        Component[] celdas = panelTablero.getComponents();
 
@@ -277,7 +279,8 @@ public class VentanaPartida extends JFrame {
 		                JTextField tx = (JTextField) celdas[fila * 9 + col];
 		                Casilla casilla = casillas[fila][col];
 		                int valor = casilla.getValor();
-
+		                
+		                //Dependiendo si es una de las casillas iniciales (!=0) o no se le dan unas propiedades
 		                if (valor != 0) {
 		                    tx.setText(String.valueOf(valor));
 		                    tx.setEditable(false);
@@ -296,13 +299,19 @@ public class VentanaPartida extends JFrame {
 		        JOptionPane.showMessageDialog(null, "Se ha reiniciado el tablero");
 			}
 		});
+		
+		//Boton para resolver el tablero
 		JButton btnResolver = new JButton("Resolver");
 		btnResolver.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
+				//Se guardan en variables las celdas y las casillas de la solucion y del inicial
 				Casilla[][] casillas = sudoku.getSolucion();
 				Casilla[][] inicial = sudoku.getTablero();
 				Component[] celdas = panelTablero.getComponents(); //esta linea lo que hace es coger cada uno de los textFields que hemos creado arriba y meterlo a un array
-
+				
+				
+				//Con un doble for se recorre el tablero 
 				for (int fila = 0; fila < 9; fila++) {
 				    for (int col = 0; col < 9; col++) {
 				        
@@ -311,17 +320,14 @@ public class VentanaPartida extends JFrame {
 				        Casilla casillaInicial = inicial[fila][col];
 
 				        int valor = casilla.getValor();
-
+				        
+				        //Se asigna el valor de la solucion a cada casilla y si no es de las iniciales se pone en blanco, sino en gris
 				        if (valor != 0) {
 				            tf.setText(String.valueOf(valor));
 				            tf.setEditable(false);
 				            tf.setBackground(new Color(220, 220, 220));
 				            tf.setFont(new Font("Segoe UI", Font.BOLD, 18));
-				        } else {
-				            tf.setText("");
-				            tf.setEditable(true);
-				        }
-				        
+				        } 
 				        if (casillaInicial.getValor() == 0) {
 				        	tf.setBackground(Color.white);
 				        	tf.setEditable(false);
@@ -330,6 +336,7 @@ public class VentanaPartida extends JFrame {
 				}
 			}
 		});
+		
 		JButton btnAjustes = new JButton("Ajustes");
 		JButton btnVolver = new JButton("Volver");
 		
@@ -464,7 +471,7 @@ public class VentanaPartida extends JFrame {
 		}
 	}
 	
-	// Dentro de la clase VentanaPartida
+	//Funcion para resaltar las casilla cuando clickas en una de ellas
 	public void resaltarCasillas(int filaSeleccionada, int colSeleccionada, Color colorResaltado, Color colorBase) {
 	    Component[] celdas = panelTablero.getComponents();
 
@@ -511,6 +518,7 @@ public class VentanaPartida extends JFrame {
 	    }
 	}
 	
+	//Funcion para cambiar el volumen dependiendo del valor del slider de ajustes
 	public void setVolumen(float volumen) {
 	    try {
 	        if (musica != null) {
@@ -530,7 +538,6 @@ public class VentanaPartida extends JFrame {
 	    }
 	}
 
-	
 	public int getVolumenActual() {
 	    try {
 	        FloatControl control = (FloatControl) musica.getControl(FloatControl.Type.MASTER_GAIN);

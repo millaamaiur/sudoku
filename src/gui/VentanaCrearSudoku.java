@@ -39,14 +39,7 @@ public class VentanaCrearSudoku extends JFrame {
 	private JButton btnGuardar;
 	private Boolean faseUno;
 	private String sudokuInicial;
-	/**
-	 * Launch the application.
-	 */
-	
 
-	/**
-	 * Create the frame.
-	 */
 	public VentanaCrearSudoku(VentanaLogin parent) {
 		this.parent = parent;
 		setTitle("Sudoku - Crear Sudoku");
@@ -128,6 +121,8 @@ public class VentanaCrearSudoku extends JFrame {
 		// ----- PANEL INFERIOR (BOTONES) -----
 		panelControles = new JPanel(new FlowLayout(FlowLayout.CENTER, 20, 10));
 
+		
+		//El boton guardar hace cosas distintas dependiendo si estamos en la fase UNO o DOS de la creacion del sudoku
 		btnGuardar= new JButton("Guardar");
 		btnGuardar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -168,6 +163,7 @@ public class VentanaCrearSudoku extends JFrame {
 		
 	}
 	
+	//Funcion que pasa el estado actual del tablero a una secuencia de digitios que podemos introducir a la base de datos
 	public String guardarEstadoTablero() {
 		String secuenciaDigitos = "";
 		
@@ -188,19 +184,15 @@ public class VentanaCrearSudoku extends JFrame {
 		return secuenciaDigitos;
 	}
 	
+	//Funcion para pasar de la primera parte de la creacion del sudoku a la segunda
+	//En la primera se piden solo las casillas iniciales y en la segunda fase se piden todas las casillas (Solucion)
 	public void transicionAFaseDos() {
 		Component[] componentes = panelTablero.getComponents();
 		
 		for (int i = 0; i < componentes.length; i++) {
 	        if (componentes[i] instanceof JTextField) {
 	            JTextField celda = (JTextField) componentes[i];
-	            
-	            // Vacía la celda, asumiendo que el usuario va a introducir la solución de cero.
-	            // Si quieres que el usuario vea sus pistas, esto es más complejo y requeriría 
-	            // marcar las celdas originales como no editables.
 	            celda.setText(""); 
-	            
-	            // Asegura que todas las celdas puedan ser rellenadas en esta fase
 	            celda.setEditable(true); 
 	            celda.setBackground(Color.WHITE); 
 	            celda.setForeground(Color.BLACK);
