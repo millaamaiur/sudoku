@@ -27,14 +27,6 @@ public class VentanaRegistrar extends JFrame {
 	private JTextField txtUsuario;
 	private JPasswordField passwordField;
 
-
-	/**
-	 * Launch the application.
-	 */
-
-	/**
-	 * Create the frame.
-	 */
 	public VentanaRegistrar(VentanaLogin parent) {
 		this.parent = parent;
 		
