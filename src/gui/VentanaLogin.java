@@ -24,8 +24,6 @@ public class VentanaLogin extends JFrame {
 	private JPanel contentPane;
 	private JTextField txtUsuario;
 	private JPasswordField passwordField;
-	private String usuarioTests = "usuario";
-	private String passTests = "password";
 	private JButton btnLogin;
 	
 	//Main de la ventanaLogin
@@ -118,10 +116,12 @@ public class VentanaLogin extends JFrame {
 		btnLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
+				//Guardar input de los usuarios
 				String usuarioInput = txtUsuario.getText();
 				String contrasenyaInput = String.copyValueOf(passwordField.getPassword());
 				
-				
+				//Guardar el rol que devuelve la función comprobar credenciales. Si ha habido un error, devuelve "ERROR" y sale un mensaje de error en pantalla
+				//Si no devuelve "ERROR" abre un tipo de ventana dependiendo del rol devuelto
 				String rol = FuncionesSudoku.comprobarCredenciales(usuarioInput, contrasenyaInput);
 				if (!rol.equals("ERROR")) {
 				 if (rol.equals("ADMIN")) {
@@ -161,6 +161,7 @@ public class VentanaLogin extends JFrame {
 		btnSalir.setBounds(10, 332, 98, 21);
 		contentPane.add(btnSalir);
 		
+		//boton registrar que abre la ventana de registro
 		JButton btnRegistrarse = new JButton("Registrarse");
 		btnRegistrarse.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -173,8 +174,8 @@ public class VentanaLogin extends JFrame {
 		contentPane.add(btnRegistrarse);
 		
 	}	
-	
-	private void confirmarSalida() { // para confirmar la salida
+	//Funcion para confirmar la salida
+	private void confirmarSalida() {
 		int confirm = JOptionPane.showConfirmDialog(null, "¿Seguro que quieres cerrar el juego?","Salir",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE);
 		if (confirm == JOptionPane.YES_OPTION) {
 			System.exit(0);

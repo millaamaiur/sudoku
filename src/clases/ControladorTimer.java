@@ -117,11 +117,11 @@ public class ControladorTimer implements Runnable{
 	    }
 	
     
-	 //metodo para saber si esta corriendo
-    public boolean isRunning() {
-        synchronized (lock) {
-            return corriendo;
-        }
-    }
+	    //metodo para saber si esta corriendo
+	    public boolean isRunning() {
+	        synchronized (lock) {
+	            return corriendo;
+	        }
+	    }
 
 }

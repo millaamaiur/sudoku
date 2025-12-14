@@ -84,9 +84,10 @@ public class VentanaPartida extends JFrame {
 		panelSuperior.add(lblTiempo, BorderLayout.EAST);
 		panelSuperior.add(panelSuperCentral, BorderLayout.CENTER);
 		
-		timer = new ControladorTimer(0, false, lblTiempo);//lo pongo aqui arriba para que funione en todos los botones
-		timer.start(); // para que empieze automaticamente al iniciar sesion 
+		timer = new ControladorTimer(0, false, lblTiempo);
+		timer.start(); // para que el timer empiece automaticamente al iniciar sesion 
 		
+		//Botones del timer
 		btnIniciarTemp = new JButton("Iniciar");
 		panelSuperCentral.add(btnIniciarTemp);
 		
@@ -101,7 +102,7 @@ public class VentanaPartida extends JFrame {
 		panelTablero = new JPanel(new GridLayout(9, 9, 2, 2));
 		panelTablero.setBackground(new Color(192, 192, 192));
 
-		//Con este bucle for generamos las casillas. SOLO NÚMEROS 1-9
+		//Con este bucle for generamos las casillas. SOLO PERMITE NÚMEROS 1-9
 		for (int i = 0; i < 81; i++) {
 		    JTextField celda = new JTextField();
 		    celda.setHorizontalAlignment(JTextField.CENTER);
@@ -112,7 +113,7 @@ public class VentanaPartida extends JFrame {
 
 				@Override
 		        public void setVisible(boolean v) {
-		            super.setVisible(false); // Siempre lo mantiene invisible
+		            super.setVisible(false); // Siempre mantiene el cursor de escritura invisible
 		        }
 		    });
 		    
@@ -178,16 +179,12 @@ public class VentanaPartida extends JFrame {
 		    if (i % 9 == 6) left = 5;
 		    if (i % 9 == 8) right = 5;
 
+		    // Le pone grosor a la celda
 		    celda.setBorder(BorderFactory.createMatteBorder(top, left, bottom, right, Color.BLACK));
 		    panelTablero.add(celda);
 		}
 		
 		contentPane.add(panelTablero, BorderLayout.CENTER);
-
-		//---------------------------------------------------------------
-		// Cargar el sudoku de prueba EN LAS CELDAS YA CREADAS
-		
-		//---------------------------------------------------------------
 		crearSudoku(sudoku);
 		
 		//Panel de abajo (Botones)
@@ -233,7 +230,8 @@ public class VentanaPartida extends JFrame {
 		            }
 		        }
 
-
+		        
+		        //Mensajes que se muestran por pantalla dependiendo del resultado de la comprobación
 		        if (vacias > 0 && errores == 0) {
 		        	
 		        	String mensaje1 = vacias + " celdas vacias\n" + "Ningun error detectado\n" + "Continua completando el sudoku";
@@ -265,11 +263,13 @@ public class VentanaPartida extends JFrame {
 		        }
 			}
 		});
+		
+		//Boton para reiniciar el tablero
 		JButton btnReiniciar = new JButton("Reiniciar");
 		btnReiniciar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				   
-		        
+		        //Guarda las casillas del sudoku y las celdas en estas variables
 		        Casilla[][] casillas = sudoku.getTablero();
 		        Component[] celdas = panelTablero.getComponents();
 
@@ -279,7 +279,8 @@ public class VentanaPartida extends JFrame {
 		                JTextField tx = (JTextField) celdas[fila * 9 + col];
 		                Casilla casilla = casillas[fila][col];
 		                int valor = casilla.getValor();
-
+		                
+		                //Dependiendo si es una de las casillas iniciales (!=0) o no se le dan unas propiedades
 		                if (valor != 0) {
 		                    tx.setText(String.valueOf(valor));
 		                    tx.setEditable(false);
@@ -298,13 +299,19 @@ public class VentanaPartida extends JFrame {
 		        JOptionPane.showMessageDialog(null, "Se ha reiniciado el tablero");
 			}
 		});
+		
+		//Boton para resolver el tablero
 		JButton btnResolver = new JButton("Resolver");
 		btnResolver.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
+				//Se guardan en variables las celdas y las casillas de la solucion y del inicial
 				Casilla[][] casillas = sudoku.getSolucion();
 				Casilla[][] inicial = sudoku.getTablero();
 				Component[] celdas = panelTablero.getComponents(); //esta linea lo que hace es coger cada uno de los textFields que hemos creado arriba y meterlo a un array
-
+				
+				
+				//Con un doble for se recorre el tablero 
 				for (int fila = 0; fila < 9; fila++) {
 				    for (int col = 0; col < 9; col++) {
 				        
@@ -313,17 +320,14 @@ public class VentanaPartida extends JFrame {
 				        Casilla casillaInicial = inicial[fila][col];
 
 				        int valor = casilla.getValor();
-
+				        
+				        //Se asigna el valor de la solucion a cada casilla y si no es de las iniciales se pone en blanco, sino en gris
 				        if (valor != 0) {
 				            tf.setText(String.valueOf(valor));
 				            tf.setEditable(false);
 				            tf.setBackground(new Color(220, 220, 220));
 				            tf.setFont(new Font("Segoe UI", Font.BOLD, 18));
-				        } else {
-				            tf.setText("");
-				            tf.setEditable(true);
-				        }
-				        
+				        } 
 				        if (casillaInicial.getValor() == 0) {
 				        	tf.setBackground(Color.white);
 				        	tf.setEditable(false);
@@ -332,6 +336,7 @@ public class VentanaPartida extends JFrame {
 				}
 			}
 		});
+		
 		JButton btnAjustes = new JButton("Ajustes");
 		JButton btnVolver = new JButton("Volver");
 		
@@ -466,7 +471,7 @@ public class VentanaPartida extends JFrame {
 		}
 	}
 	
-	// Dentro de la clase VentanaPartida
+	//Funcion para resaltar las casilla cuando clickas en una de ellas
 	public void resaltarCasillas(int filaSeleccionada, int colSeleccionada, Color colorResaltado, Color colorBase) {
 	    Component[] celdas = panelTablero.getComponents();
 
@@ -513,6 +518,7 @@ public class VentanaPartida extends JFrame {
 	    }
 	}
 	
+	//Funcion para cambiar el volumen dependiendo del valor del slider de ajustes
 	public void setVolumen(float volumen) {
 	    try {
 	        if (musica != null) {
@@ -532,7 +538,6 @@ public class VentanaPartida extends JFrame {
 	    }
 	}
 
-	
 	public int getVolumenActual() {
 	    try {
 	        FloatControl control = (FloatControl) musica.getControl(FloatControl.Type.MASTER_GAIN);
@@ -555,19 +560,19 @@ public class VentanaPartida extends JFrame {
 	
 
 	//metodos para el timer
-		public void pausarTimer() {
-		    if (timer != null) {
-		        timer.pause();
-		    }
-		}
+	public void pausarTimer() {
+	    if (timer != null) {
+	        timer.pause();
+	    }
+	}
 
-		public void reanudarTimer() {
-		    if (timer != null) {
-		        timer.resume();
-		    }
-		}
+	public void reanudarTimer() {
+	    if (timer != null) {
+	        timer.resume();
+	    }
+	}
 
-		public ControladorTimer getTimer() {
-		    return timer;
-		}
+	public ControladorTimer getTimer() {
+	    return timer;
+	}
 }
