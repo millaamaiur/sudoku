@@ -207,9 +207,6 @@ public class VentanaAjustes extends JFrame {
 
 		        parent.guardarAjustes(dificultad, volumen, colorFondo);
 		        parent.setVolumen(volumen); // aplicar volumen real
-		        if (!dificultad.equals(dificultadOriginal)) {
-		            parent.crearSudoku(FuncionesSudoku.generarSudokuNuevo(dificultad));
-		        }
 		        
 		        // REANUDAR el timer al volver
 		        if (parent != null) {
