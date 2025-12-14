@@ -20,7 +20,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import sudokuBDFunciones.FuncionesSudoku;
 
 public class VentanaPartida extends JFrame {
 
@@ -427,7 +426,7 @@ public class VentanaPartida extends JFrame {
 		String dificultadActual = this.sudoku.getDificultad();
 		
 		if (!dificultadActual.equals(dificultad)) {
-	        
+            timer.stop();
 	        // Cargar el nuevo Sudoku usando la función que acepta dificultad
 	        Sudoku nuevoSudoku = FuncionesSudoku.generarSudokuNuevo(dificultad);
 	        
@@ -438,13 +437,20 @@ public class VentanaPartida extends JFrame {
 	            //Actualizar el tablero gráfico con el nuevo Sudoku
 	            crearSudoku(nuevoSudoku);
 	            
+	            try { //esperar a que el sudoku carge, si es el dificil, tarda mas y el contador no funciona bien
+	                Thread.sleep(100); // 100ms de pausa
+	            } catch (InterruptedException e) {
+	                // Ignorar
+	            }
+	            
 	            //Reiniciar el tiempo
-	            timer.stop();
 	            timer.reset();
-	            timer.start(); 
+	            timer.start();
+	            
 	            
 	            JOptionPane.showMessageDialog(this, "Se ha cargado un nuevo Sudoku con dificultad: " + dificultad, "Nuevo Sudoku", JOptionPane.INFORMATION_MESSAGE);
 	        } else {
+	        	timer.resume();
 	            JOptionPane.showMessageDialog(this, "Error al cargar el Sudoku con la nueva dificultad.", "Error de BD", JOptionPane.ERROR_MESSAGE);
 	        }
 		}
