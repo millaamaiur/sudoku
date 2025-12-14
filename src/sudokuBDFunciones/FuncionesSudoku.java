@@ -292,4 +292,27 @@ public class FuncionesSudoku {
 		    
 		    return registrado;
 	}
+	
+	public static int contarVaciosRecursivo(int[][] tablero, int indicePlano) {
+        
+        //CASO BASE
+        // Si el índice ha superado el final del tablero (81 celdas, índices de 0 a 80).
+		if (indicePlano >= 81) {
+			return 0; // No hay más celdas, la cuenta es 0.
+		}
+
+        // Convertir el índice plano (0-80) a coordenadas (fila, columna)
+		int fila = indicePlano / 9;
+		int columna = indicePlano % 9;
+        
+        // Comprobar la casilla
+		int cuentaActual = 0;
+		if (tablero[fila][columna] == 0) {
+			cuentaActual = 1;
+		}
+
+        //CASO RECURSIVO
+        // El resultado total es la cuenta de la casilla actual MÁS el resultado de la llamada recursiva para el resto del tablero.
+		return cuentaActual + contarVaciosRecursivo(tablero, indicePlano + 1);
+   }
 }

@@ -39,6 +39,8 @@ public class VentanaPartida extends JFrame {
 	private JPanel panelSuperior;
 	private Clip musica;
 	private ControladorTimer timer;
+	private Sudoku sudoku;
+	
 	
 	public VentanaPartida(VentanaLogin parent) {
 		this.parent = parent;
@@ -48,7 +50,7 @@ public class VentanaPartida extends JFrame {
 		setLocationRelativeTo(null);
 		setResizable(false);
 		
-		Sudoku sudoku = FuncionesSudoku.generarSudokuInicial();
+		this.sudoku = FuncionesSudoku.generarSudokuInicial();
 		
 		ImageIcon icon = new ImageIcon(getClass().getResource("/gui/logo.png"));
 		Image img = icon.getImage().getScaledInstance(32, 32, Image.SCALE_SMOOTH);
@@ -197,7 +199,7 @@ public class VentanaPartida extends JFrame {
 		        Casilla[][] solucion = sudoku.getSolucion(); 
 		        Component[] celdas = panelTablero.getComponents();
 		        int errores = 0;
-		        int vacias = 0;
+		        int[][] matrizActual = new int[9][9];
 		        
 		        //poner colores de vuelta
 		        for (Component c : celdas) {
@@ -213,10 +215,11 @@ public class VentanaPartida extends JFrame {
 		                String texto = tx.getText();
 		                
 		                if (texto.isEmpty()) {
-		                    vacias++;
+		                	matrizActual[fila][col] = 0;
 		                } else {
 		                    try {
 		                        int valor = Integer.parseInt(texto);
+		                        matrizActual[fila][col] = valor;
 		                        if (valor != solucion[fila][col].getValor()) {
 		                            errores++;
 		                            tx.setBackground(Color.PINK); 
@@ -225,11 +228,13 @@ public class VentanaPartida extends JFrame {
 		                            tx.setBackground(new Color(200, 255, 200));
 		                        }
 		                    } catch (NumberFormatException ee) {
+		                    	matrizActual[fila][col] = 0;
 		                    }
 		                }
 		            }
 		        }
-
+		        
+		        int vacias = FuncionesSudoku.contarVaciosRecursivo(matrizActual, 0);
 		        
 		        //Mensajes que se muestran por pantalla dependiendo del resultado de la comprobación
 		        if (vacias > 0 && errores == 0) {
@@ -413,11 +418,36 @@ public class VentanaPartida extends JFrame {
 	public void guardarAjustes(String dificultad, int volumen, Color colorFondo) {
 		// TODO Auto-generated method stub
 		lblDificultad.setText("Dificultad: " + dificultad);
-		 this.getContentPane().setBackground(colorFondo);
-         this.getPanelTablero().setBackground(colorFondo);
-         this.getPanelControles().setBackground(colorFondo);
-         this.getPanelSuperCentral().setBackground(colorFondo);
-         this.getPanelSuperior().setBackground(colorFondo);
+		this.getContentPane().setBackground(colorFondo);
+		this.getPanelTablero().setBackground(colorFondo);
+		this.getPanelControles().setBackground(colorFondo);
+		this.getPanelSuperCentral().setBackground(colorFondo);
+		this.getPanelSuperior().setBackground(colorFondo);
+		
+		String dificultadActual = this.sudoku.getDificultad();
+		
+		if (!dificultadActual.equals(dificultad)) {
+	        
+	        // Cargar el nuevo Sudoku usando la función que acepta dificultad
+	        Sudoku nuevoSudoku = FuncionesSudoku.generarSudokuNuevo(dificultad);
+	        
+	        if (nuevoSudoku != null) {
+	            //Asignar el nuevo Sudoku a la variable de clase
+	            this.sudoku = nuevoSudoku; 
+	            
+	            //Actualizar el tablero gráfico con el nuevo Sudoku
+	            crearSudoku(nuevoSudoku);
+	            
+	            //Reiniciar el tiempo
+	            timer.stop();
+	            timer.reset();
+	            timer.start(); 
+	            
+	            JOptionPane.showMessageDialog(this, "Se ha cargado un nuevo Sudoku con dificultad: " + dificultad, "Nuevo Sudoku", JOptionPane.INFORMATION_MESSAGE);
+	        } else {
+	            JOptionPane.showMessageDialog(this, "Error al cargar el Sudoku con la nueva dificultad.", "Error de BD", JOptionPane.ERROR_MESSAGE);
+	        }
+		}
 	}
 	
 	public JPanel getPanelTablero() {
@@ -462,10 +492,11 @@ public class VentanaPartida extends JFrame {
 		            tf.setFocusable(false);
 		            tf.setFont(new Font("Segoe UI", Font.BOLD, 18));
 		        } else {
-		            tf.setText("");
+		        	tf.setText("");
 		            tf.setBackground(Color.WHITE);
 		            tf.setEditable(true);
 		            tf.setFocusable(true);
+		            tf.setFont(new Font("Segoe UI", Font.PLAIN, 18));
 		        }
 		    }
 		}
